@@ -1,0 +1,17 @@
+{
+  "migIndex": 1,
+  "data": [
+    {
+      "path": "assets/fonts/Bilagike.otf",
+      "sha1": "25ee57fd593b72b96caecfcbd7db7bbb3cf41ac9"
+    },
+    {
+      "path": "assets/fonts/GT-America-Medium.otf",
+      "sha1": "9e7deb316a266d1bbfd3bc21225a97c5916b056c"
+    },
+    {
+      "path": "assets/fonts/GT-America-Regular.otf",
+      "sha1": "60449a1126228555f815f7e2709db66d2e31ad5f"
+    }
+  ]
+}
