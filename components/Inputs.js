@@ -4,12 +4,13 @@ import Theme from "../Theme"
 
 const colors = Theme.colors
 const size = Theme.size
+
 export const Field = (props) => {
 
     return(
         <TextInput
         style={{
-          marginTop: props.marginTop, borderBottomColor: colors.primary, borderBottomWidth: 1,
+          marginTop: props.marginTop, marginBottom:props.marginBottom, borderBottomColor: colors.primary, borderBottomWidth: 1,
           paddingBottom: 4, color: '#F8EFEB', opacity: 1, fontSize: size.body
         }}
         placeholder={props.placeholder}
