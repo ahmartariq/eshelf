@@ -6,9 +6,8 @@ import Account, {ChangeEmail, ChangePassword} from './screens/Account';
 import Address, {EditAddress} from './screens/Address';
 import Payment, {PaymentMethodInfo} from './screens/Payment';
 import ForgotPassword , {OTP, ResetPassword} from './screens/ForgotPassowrd';
-
-
-
+import { NavigationContainer } from '@react-navigation/native';
+import Tabs from './navigation/Tabs';
 
 const App = () => {
   return (
@@ -17,11 +16,14 @@ const App = () => {
     // <Account />
     // <Address />
     // <EditAddress />
-    <Payment />
+    // <Payment />
     // <PaymentMethodInfo />
     // <ForgotPassword />
     // <OTP />
     // <ResetPassword />
+    <NavigationContainer>
+      <Tabs />
+    </NavigationContainer>
   );
 };
 
