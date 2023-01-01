@@ -7,9 +7,6 @@ import Address, {EditAddress} from './screens/Address';
 import Payment, {PaymentMethodInfo} from './screens/Payment';
 import ForgotPassword , {OTP, ResetPassword} from './screens/ForgotPassowrd';
 
-
-
-
 const App = () => {
   return (
     // <ChangePassword />
@@ -17,8 +14,8 @@ const App = () => {
     // <Account />
     // <Address />
     // <EditAddress />
-    <Payment />
-    // <PaymentMethodInfo />
+    // <Payment />
+    <PaymentMethodInfo />
     // <ForgotPassword />
     // <OTP />
     // <ResetPassword />
