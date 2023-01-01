@@ -14,6 +14,8 @@ const Tab = createBottomTabNavigator();
 
 
 const colors = Theme.colors
+
+
 const Tabs = () => {
 
     const [color, setColor] = useState(colors.text)
@@ -120,3 +122,4 @@ stroke= ${colors.text} stroke-width="3" stroke-linecap="round" stroke-linejoin="
 }
 
 export default Tabs
+

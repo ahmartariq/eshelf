@@ -21,9 +21,12 @@ const App = () => {
     // <ForgotPassword />
     // <OTP />
     // <ResetPassword />
-    <NavigationContainer>
-      <Tabs />
-    </NavigationContainer>
+    <Login />
+
+    // <NavigationContainer>
+    //   <Tabs />
+    // </NavigationContainer>
+
   );
 };
 
