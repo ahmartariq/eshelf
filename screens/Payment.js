@@ -65,10 +65,10 @@ export const PaymentMethodInfo = () =>{
         PAYMENT METHOD
       </Text>
 
-      <Field placeholder={"CARD NUMBER"} marginBottom={30} />
+      <Field placeholder={"CARD NUMBER"} marginBottom={30} keyboardType={"numeric"} />
       <Field placeholder={"EXPIRTY DATE"} marginBottom={30} />
       <Field placeholder={"HOLDER NAME"} marginBottom={30} />
-      <Field placeholder={"CVV"} />
+      <Field placeholder={"CVV"} keyboardType={"numeric"} />
       
 
       <Button text={"NEXT"} height={53} marginTop={200} />
