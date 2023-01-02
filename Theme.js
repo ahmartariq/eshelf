@@ -25,6 +25,27 @@ const Theme = {
         fontSize: 28,
         color :'#EBCFC2',
         fontFamily: 'GT-America-Medium'
+    },
+    title1Black : {
+        fontSize: 28,
+        color :'black',
+        fontFamily: 'GT-America-Regular'
+    },
+
+    eshlefBlack : {
+        fontFamily: 'Bilagike',
+        fontSize : 87,
+        color : 'black',
+        position : 'absolute',
+        top : 20,
+        left:  31,
+        zIndex : 1000
+    },
+
+    eshlefWhite : {
+        fontFamily: 'Bilagike',
+        fontSize : 87,
+        color : 'white'
     }
 }
 

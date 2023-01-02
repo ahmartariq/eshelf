@@ -8,6 +8,7 @@ import Payment, {PaymentMethodInfo} from './screens/Payment';
 import ForgotPassword , {OTP, ResetPassword} from './screens/ForgotPassowrd';
 import { NavigationContainer } from '@react-navigation/native';
 import Tabs from './navigation/Tabs';
+import ProductList from './screens/ProductList';
 
 const App = () => {
   return (
@@ -22,7 +23,7 @@ const App = () => {
     // <OTP />
     // <ResetPassword />
     // <Login />
-
+    <ProductList />
     // <NavigationContainer>
     //   <Tabs />
     // </NavigationContainer>
