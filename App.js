@@ -13,7 +13,7 @@ const App = () => {
   return (
     // <ChangePassword />
     // <ChangeEmail />
-    // <Account />
+    <Account />
     // <Address />
     // <EditAddress />
     // <Payment />
@@ -21,7 +21,7 @@ const App = () => {
     // <ForgotPassword />
     // <OTP />
     // <ResetPassword />
-    <Login />
+    // <Login />
 
     // <NavigationContainer>
     //   <Tabs />
