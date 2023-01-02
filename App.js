@@ -9,12 +9,13 @@ import ForgotPassword , {OTP, ResetPassword} from './screens/ForgotPassowrd';
 import { NavigationContainer } from '@react-navigation/native';
 import Tabs from './navigation/Tabs';
 import ProductList from './screens/ProductList';
+import Profile from './screens/Profile';
 
 const App = () => {
   return (
     // <ChangePassword />
     // <ChangeEmail />
-    <Account />
+    // <Account />
     // <Address />
     // <EditAddress />
     // <Payment />
@@ -23,10 +24,12 @@ const App = () => {
     // <OTP />
     // <ResetPassword />
     // <Login />
-    <ProductList />
+    // <ProductList />
     // <NavigationContainer>
     //   <Tabs />
     // </NavigationContainer>
+
+    <Profile />
 
   );
 };
