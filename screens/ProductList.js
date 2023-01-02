@@ -38,7 +38,7 @@ const ProductList = () => {
                 {
                     Category.map((c, key) => (
                         <TouchableOpacity style={{ marginRight: 30 }} activeOpacity={0.7} key={key} onPress={() => active === key ? setActive(0) : setActive(key)} >
-                            <Text style={{ fontSize: size.headline, color: active === key ? colors.primary : colors.gray }}>{c}</Text>
+                            <Text style={{ fontSize: size.headline, fontWeight:'bold', color: active === key ? colors.primary : colors.gray }}>{c}</Text>
                         </TouchableOpacity>
                     ))
                 }
