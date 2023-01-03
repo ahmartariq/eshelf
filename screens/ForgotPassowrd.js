@@ -61,7 +61,7 @@ export const OTP = () => {
         <Text style={title1}>Check email for OTP</Text>
         <Text style={{ fontSize: text.fontSize, color: text.color, marginTop: 14, fontFamily: text.fontFamily }}>To reset your password, please enter the 5 digit pin sent to you email.</Text>
 
-        <Field marginTop={'15%'} placeholder={"EMAIL"} keyboardType={"email-address"} autoComplete={"email"} />
+        <Field marginTop={'15%'} placeholder={"OTP"} keyboardType={"email-address"} autoComplete={"email"} />
         <TouchableOpacity activeOpacity={0.7} style={{marginTop: 40}}>
         <Text style={{alignSelf: 'center' , fontSize: text.fontSize, color: text.color, fontFamily: text.fontFamily }}>Resend Code?</Text>
         </TouchableOpacity>

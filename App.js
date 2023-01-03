@@ -19,17 +19,18 @@ const App = () => {
     // <Address />
     // <EditAddress />
     // <Payment />
-    // <PaymentMethodInfo />
+    <PaymentMethodInfo />
     // <ForgotPassword />
     // <OTP />
     // <ResetPassword />
     // <Login />
+    // <SignUp />
     // <ProductList />
     // <NavigationContainer>
     //   <Tabs />
     // </NavigationContainer>
 
-    <Profile />
+    // <Profile />
 
   );
 };
