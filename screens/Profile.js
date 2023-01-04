@@ -1,7 +1,8 @@
 import React, {useState} from 'react';
-import {View, Text, ScrollView, TouchableOpacity} from 'react-native';
+import {View, Text, ScrollView, TouchableOpacity, Switch} from 'react-native';
 import {SvgXml} from 'react-native-svg';
 import { SettingLink } from '../components/SettingLink';
+import { BorderedButton } from '../components/Button';
 import Theme from '../Theme';
 
 const colors = Theme.colors;
@@ -108,16 +109,34 @@ const ProfileView = () => {
 
 
 const UserSetting = () => {
+  const [colorSwitchValue, setColorSwitchValue] = useState(true);
+  const [emailSwitchValue, setEmailSwitchValue] = useState(false);
+
+  const colorToggleSwitch = (value) => {
+    setColorSwitchValue(value);
+  }
+  const emailToggleSwitch = (value) => {
+    setEmailSwitchValue(value);
+  }
+
     return(
-        <View>   
-        <Text
-          style={{
-            fontSize: size.headline,
-            color: colors.gray,
-            fontWeight: 'bold',
-          }}>
-          UserSetting
-        </Text>
+        <View style={{marginTop:"18%"}}>   
+        
+          <View style={{flexDirection:'row', justifyContent:'space-between', marginBottom:30}}>
+            <Text style={{color:colors.gray, fontSize:size.body}}>WHITE MODE</Text>
+            <Switch style={{ transform:[{scaleX: 1}, {scaleY: 1}] }} onValueChange={colorToggleSwitch} value={colorSwitchValue} thumbColor={"black"} trackColor={{true: '#D79E84', false: '#D7D7D7'}} />
+          </View>
+
+          <View style={{flexDirection:'row', justifyContent:'space-between'}}>
+            <Text style={{color:colors.gray, fontSize:size.body}}>NOTIFY ME</Text>
+            <Switch style={{ transform:[{scaleX: 1}, {scaleY: 1}] }} onValueChange={emailToggleSwitch} value={emailSwitchValue} thumbColor={"black"} trackColor={{true: '#D79E84', false: '#D7D7D7'}} />
+          </View>
+
+          <BorderedButton text={"LOGOUT"} height={50} marginTop={"25%"} />
+
+          <Text style={{marginTop:'10%', fontSize:11, textAlign: 'justify', color:colors.gray, opacity:0.7 }}>AT ESHELF WE TAKE YOUR PRIVACY VERY SERIOUSLY AND ARE COMMITED TO THE PROTECTION OF YOUR PERSONAL DATA. LEARN MORE ABOUT HOW WE CARE FOR AND USE YOUR DATEA IN OUR <Text style={{textDecorationLine: 'underline'}}>PRIVACY POLICY</Text>
+          </Text>
+
         </View>
     )
 }
