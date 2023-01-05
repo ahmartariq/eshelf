@@ -1,5 +1,5 @@
 import { useState, useCallback } from 'react';
-import { Text, TextInput, View, Image, TouchableOpacity, ScrollView } from 'react-native';
+import { Text, View, TouchableOpacity } from 'react-native';
 import Theme from '../Theme';
 import { Button } from '../components/Button';
 import { Field, Password } from '../components/Inputs';

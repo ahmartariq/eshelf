@@ -19,13 +19,13 @@ const App = () => {
     // <Address />
     // <EditAddress />
     // <Payment />
-    <PaymentMethodInfo />
+    // <PaymentMethodInfo />
     // <ForgotPassword />
     // <OTP />
     // <ResetPassword />
     // <Login />
     // <SignUp />
-    // <ProductList />
+    <ProductList />
     // <NavigationContainer>
     //   <Tabs />
     // </NavigationContainer>
