@@ -17,6 +17,8 @@ export const Field = (props) => {
         placeholderTextColor="#646261"
         keyboardType={props.keyboardType}
         autoComplete={props.autoComplete}
+        value={props.value}
+        onChangeText={props.onChangeText}
       />
 
     )
@@ -42,6 +44,8 @@ export const Password = props => {
               keyboardType='password'
               autoComplete='password'
               secureTextEntry={secure}
+              value={props.value}
+              onChangeText={props.onChangeText}
             />
             <TouchableOpacity
             activeOpacity={0.7}

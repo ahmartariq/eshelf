@@ -46,7 +46,7 @@ const Login = () => {
         <Text style={{ fontSize: text.fontSize, color: text.color, marginTop: 4, fontFamily: text.fontFamily }}>You have been missed!</Text>
 
         <Field marginTop={'15%'} placeholder={"EMAIL"} keyboardType={"email-address"} autoComplete={"email"} />
-        <Password marginTop={"10%"} placeholder={"PASSWORD"} />
+        <Password marginTop={"10%"} placeholder={"PASSWORD "} />
 
         <TouchableOpacity
           activeOpacity={0.7}

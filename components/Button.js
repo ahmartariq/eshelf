@@ -7,6 +7,7 @@ export const Button = (props) => {
     return(
         <TouchableOpacity onPress={props.onPress}
         activeOpacity={0.7}
+        disabled={props.disabled}
         style={{backgroundColor: colors.primary, height: props.height , marginTop: props.marginTop, justifyContent: 'center', alignItems: 'center'}}
         >
           <Text style={{color: colors.text , fontFamily: 'rg' , fontSize: size.body, letterSpacing: 3}}>{props.text}</Text>

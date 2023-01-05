@@ -30,7 +30,7 @@ const SignUp = () => {
             <Field marginTop={'15%'} placeholder={"NAME"} keyboardType={"text"} />
             <Field marginTop={'10%'} placeholder={"EMAIL"} keyboardType={"email-address"} autoComplete={"email"} />
             <Field marginTop={'10%'} placeholder={"RETYPE EMAIL"} keyboardType={"email-address"} autoComplete={"email"} />
-            <Password marginTop={"10%"} placeholder={"PASSWORD"} />
+            <Password marginTop={"10%"} placeholder={"PASSWORD "} />
             <Password marginTop={"10%"} placeholder={"RETYPE PASSWORD"} />
 
             <View style={{marginTop: '20%' , justifyContent: 'center' }}>

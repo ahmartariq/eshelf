@@ -80,7 +80,7 @@ export const PaymentMethodInfo = () =>{
         <Image height={12} width={12} style={{height:35, width:60, borderRadius:8, position:"absolute", left:'82%', top:1}} source={require('../assets/pics/visa.png')} />
       </View>
       <Field placeholder={"CARD NUMBER"} marginBottom={30} keyboardType={"numeric"} /> 
-      <Field placeholder={"EXPIRTY DATE"} marginBottom={30} />
+      <Field placeholder={"EXPIRY DATE"} marginBottom={30} />
       <Field placeholder={"HOLDER NAME"} marginBottom={30} />
       <Field placeholder={"CVV"} keyboardType={"numeric"} />
       

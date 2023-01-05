@@ -9,6 +9,7 @@ import ForgotPassword , {OTP, ResetPassword} from './screens/ForgotPassowrd';
 import { NavigationContainer } from '@react-navigation/native';
 import Tabs from './navigation/Tabs';
 import ProductList from './screens/ProductList';
+import Profile from './screens/Profile';
 
 const App = () => {
   return (
@@ -23,10 +24,13 @@ const App = () => {
     // <OTP />
     // <ResetPassword />
     // <Login />
+    // <SignUp />
     <ProductList />
     // <NavigationContainer>
     //   <Tabs />
     // </NavigationContainer>
+
+    // <Profile />
 
   );
 };
