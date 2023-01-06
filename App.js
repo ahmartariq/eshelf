@@ -10,6 +10,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import Tabs from './navigation/Tabs';
 import ProductList from './screens/ProductList';
 import Profile from './screens/Profile';
+import Product from './screens/Product';
 
 const App = () => {
   return (
@@ -26,6 +27,7 @@ const App = () => {
     // <Login />
     // <SignUp />
     <ProductList />
+    // <Product />
     // <NavigationContainer>
     //   <Tabs />
     // </NavigationContainer>
