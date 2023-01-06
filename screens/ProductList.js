@@ -1,5 +1,5 @@
 import React, { useState , useEffect } from 'react'
-import { View, Text, Image, ScrollView, TouchableOpacity } from 'react-native'
+import { View, Text, Image, ScrollView, TouchableOpacity , FlatList } from 'react-native'
 import Theme from '../Theme'
 import { SvgXml } from 'react-native-svg'
 import { BorderedButton } from '../components/Button'
@@ -15,7 +15,7 @@ const product = [
     {
         name : 'OVERSIZED CYBER GRAPHIC HOODED SWEATSHIRT',
         price : 3000.00,
-        image : require('../assets/pics/product1.png'),
+        image : require('../assets/pics/product.png'),
         color : 'black',
         type : 'sweatshirt'
     },
@@ -38,6 +38,13 @@ const product = [
         price : 3500.00,
         image : require('../assets/pics/product4.png'),
         color : 'black',
+        type : 'sweater'
+    },
+    {
+        name : 'REGULAR FIT BROAD STRIPED SWEATER',
+        price : 3500.00,
+        image : require('../assets/pics/product5.png'),
+        color : 'green',
         type : 'sweater'
     },
     {
@@ -113,7 +120,7 @@ const ProductList = () => {
                     <BorderedButton text='FILTERS' height={29} marginTop={10} />
                 </View>
             </View>
-            <ScrollView horizontal={true} style={{ flexDirection: 'row', flex: 1, marginTop: '3%' }} showsHorizontalScrollIndicator={false}>
+            <ScrollView horizontal={true} style={{ flexDirection: 'row', flex: 1, marginTop: '3%'}} showsHorizontalScrollIndicator={false}>
                 {
                     Category.map((c, key) => ( 
                         <TouchableOpacity style={{ marginRight: 30 }} activeOpacity={0.7} key={key} onPress={(e) => changeCategory(e,key)} >
@@ -122,11 +129,13 @@ const ProductList = () => {
                     ))
                 }
             </ScrollView>
-            <View style={{flexWrap : 'wrap' , width: '100%' ,  flexDirection: 'row'}}>
+            <View style={{flexWrap : 'wrap' , width: '100%' ,  flexDirection: 'row' , paddingBottom :80}}>
             { select.length > 0 ?
                 select.map((sel, key) => (
-                    <TouchableOpacity key={key} style={{width: "45%" , margin : 9.5}}>
-                    <Image  source={sel.image}/>
+                    <TouchableOpacity activeOpacity={0.9} key={key} style={ key % 4 === 0 && key !==0 ?  { width: "100%", marginVertical : 9.5} :{ width: "45%" , margin : 9.5}}>
+                    {/* <View style={{width : '100%' , height: '59%' , overflow : 'hidden'}}> */}
+                    <Image  source={sel.image} style={key % 4 === 0 && key !==0 ? {width: '100%' }  : {width: 180 , height: 250}}/>
+                    {/* </View> */}
                     <Text style={{color : colors.text, fontFamily : 'GT-America-Regular' , fontSize : 12 , marginTop : 4}}>{sel.name}</Text>
                     <Text style={{color : colors.primary, fontFamily : 'GT-America-Regular' , fontSize : 10 , marginTop : 4}}>Rs. {sel.price}</Text>
                 </TouchableOpacity>
@@ -135,8 +144,6 @@ const ProductList = () => {
                         <Text style={{fontFamily : 'GT-America-Medium' , fontSize: 28, color : colors.text}}>No Product Available </Text>
                     </View>
             }
-              
-                
             </View>
         </ScrollView>
     )
@@ -150,3 +157,6 @@ export default ProductList
 //                             <Text style={{ fontSize: size.headline, color: active === key ? colors.primary : colors.gray }}>{c.color}</Text>
 //                         </TouchableOpacity>
 //                     )) */
+
+
+//
