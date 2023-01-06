@@ -25,10 +25,10 @@ const App = () => {
     // <ResetPassword />
     // <Login />
     // <SignUp />
-    <ProductList />
-    // <NavigationContainer>
-    //   <Tabs />
-    // </NavigationContainer>
+    // <ProductList />
+    <NavigationContainer>
+      <Tabs />
+    </NavigationContainer>
 
     // <Profile />
 

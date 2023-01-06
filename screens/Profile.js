@@ -35,7 +35,8 @@ const Profile = () => {
     }
   }
 
-  console.log(active);
+  // console.log(active);
+
   return (
     <View style={{backgroundColor: colors.background, height: '100%', flex: 1}}>
       <View>
@@ -123,7 +124,7 @@ const UserSetting = () => {
         <View style={{marginTop:"18%"}}>   
         
           <View style={{flexDirection:'row', justifyContent:'space-between', marginBottom:30}}>
-            <Text style={{color:colors.gray, fontSize:size.body}}>WHITE MODE</Text>
+            <Text style={{color:colors.gray, fontSize:size.body}}>DARK  MODE</Text>
             <Switch style={{ transform:[{scaleX: 1}, {scaleY: 1}] }} onValueChange={colorToggleSwitch} value={colorSwitchValue} thumbColor={"black"} trackColor={{true: '#D79E84', false: '#D7D7D7'}} />
           </View>
 
@@ -142,15 +143,10 @@ const UserSetting = () => {
 }
 const MyOrders = () => {
     return(
-        <View>   
-        <Text
-          style={{
-            fontSize: size.headline,
-            color: colors.gray,
-            fontWeight: 'bold',
-          }}>
-          MyOrders
-        </Text>
+        <View style={{marginTop:'10%'}}>   
+          <Text style={{color:"#F8EFEB", fontSize:size.headline}}>ORDERS</Text>
+          
+
         </View>
     )
 }
