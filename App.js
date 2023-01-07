@@ -11,28 +11,33 @@ import Tabs from './navigation/Tabs';
 import ProductList from './screens/ProductList';
 import Profile from './screens/Profile';
 import Product from './screens/Product';
+import Admin, {Users} from './screens/Admin';
+import UsersField from './components/UsersField';
 
 const App = () => {
   return (
-    // <ChangePassword />
-    // <ChangeEmail />
-    // <Account />
+    //<UsersField/>
+    <Users/>
+    //<Admin/>
+    //<ChangePassword />
+    //<ChangeEmail />
+    //<Account />
     // <Address />
     // <EditAddress />
     // <Payment />
     // <PaymentMethodInfo />
     // <ForgotPassword />
-    // <OTP />
+    //<OTP />
     // <ResetPassword />
-    // <Login />
-    // <SignUp />
-    <ProductList />
-    // <Product />
+    //<Login />
+    //<SignUp />
+    //<ProductList />
+    //<Product />
     // <NavigationContainer>
     //   <Tabs />
     // </NavigationContainer>
 
-    // <Profile />
+    //<Profile />
 
   );
 };
