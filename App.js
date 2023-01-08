@@ -26,8 +26,8 @@ const App = () => {
     // <ResetPassword />
     // <Login />
     // <SignUp />
-    <ProductList />
-    // <Product />
+    // <ProductList />
+    <Product />
     // <NavigationContainer>
     //   <Tabs />
     // </NavigationContainer>
