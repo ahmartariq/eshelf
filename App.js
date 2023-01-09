@@ -27,6 +27,7 @@ const App = () => {
     // <Login />
     // <SignUp />
     <ProductList />
+    // <Product />
     // <NavigationContainer>
     //   <Tabs />
     // </NavigationContainer>
