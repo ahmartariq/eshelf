@@ -2,7 +2,6 @@ import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import Theme from "../Theme";
 import { SettingLink } from './SettingLink';
-import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
 export default function UsersField({Name, Email, PhoneNumber}) {
 
     const colors = Theme.colors
@@ -20,11 +19,10 @@ export default function UsersField({Name, Email, PhoneNumber}) {
                 }}>
                 {Name}
             </Text>
-            <Text style={{color:colors.primary, paddingLeft: '5%'}}>{Email} </Text>
+            <Text style={{color:colors.primary, paddingLeft: '5%'}}>{Email}</Text>
             <Text style={{color:colors.primary, marginBottom:20, paddingLeft: '5%'}}>{PhoneNumber}</Text>
         </View>
         <View >
-            <DeleteOutlined/>
         </View>
     </View>
   )
