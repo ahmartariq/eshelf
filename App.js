@@ -31,9 +31,7 @@ const App = () => {
     // <NavigationContainer>
     //   <Tabs />
     // </NavigationContainer>
-
     // <Profile />
-
   );
 };
 
