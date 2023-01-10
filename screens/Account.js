@@ -1,9 +1,9 @@
+import { useState } from 'react';
 import { Text, TextInput, View, Image, TouchableOpacity, ScrollView, Alert } from 'react-native';
 import Theme from '../Theme';
 import {SettingLink} from '../components/SettingLink';
 import { Field, Password } from '../components/Inputs';
 import { Button } from '../components/Button';
-import { useState } from 'react';
 
 const colors = Theme.colors
 const size = Theme.size
@@ -29,8 +29,14 @@ const Account = () => {
 
 export const ChangeEmail = () => {
 
+    const handleChangeEmailButton = () => {
+        console.log(currentPassword);
+        console.log(newEmail);
+        console.log(retypeNewEmail);
+      }
+
     const [currentPassword, setCurrentPassword] = useState('');
-    const [newEmail, setnNewEmail] = useState('');
+    const [newEmail, setNewEmail] = useState('');
     const [retypeNewEmail, setRetypeNewEmail] = useState('');
 
     return(
@@ -41,11 +47,11 @@ export const ChangeEmail = () => {
             
             <Password placeholder={"CURRENT PASSWORD "} onChangeText={setCurrentPassword} value={currentPassword} />  
 
-            <Field placeholder={"NEW EMAIL"} marginTop={"7%"} onChangeText={setnNewEmail} value={newEmail} />
+            <Field placeholder={"NEW EMAIL"} marginTop={"7%"} onChangeText={setNewEmail} value={newEmail} />
             
             <Field placeholder={"RETYPE NEW EMAIL"} marginTop={"7%"} onChangeText={setRetypeNewEmail} value={retypeNewEmail} />
 
-            <Button height={50} text={"SAVE"} marginTop={"10%"} />
+            <Button height={50} text={"SAVE"} marginTop={"10%"} onpress={handleChangeEmailButton} />
 
         </View>
     )
@@ -54,6 +60,16 @@ export const ChangeEmail = () => {
 
 export const ChangePassword = () => {
 
+    const handleChangePasswordButton = () => {
+        console.log(currentPassword);
+        console.log(newPassword);
+        console.log(retypeNewPassword);
+      }
+
+    const [currentPassword, setCurrentPassword] = useState('');
+    const [newPassword, setNewPassword] = useState('');
+    const [retypeNewPassword, setRetypeNewPassword] = useState('');
+    
     return(
         <View style={{ backgroundColor: colors.background , paddingTop: '10%', paddingHorizontal: 35 , flex: 1}}>
             <Image style={{marginTop:9, width:18, height:18 }} source={require("../assets/pics/backarrow.png")}></Image>
@@ -61,11 +77,11 @@ export const ChangePassword = () => {
             
             <Password placeholder={"CURRENT PASSWORD "}  />  
 
-            <Password placeholder={"NEW PASSWORD "} marginTop={"7%"} />
+            <Password placeholder={"NEW PASSWORD "} marginTop={"7%"} onChangeText={newPassword} value={setNewPassword} />
             
-            <Password placeholder={"RETYPE NEW PASSWORD "} marginTop={"7%"} />
+            <Password placeholder={"RETYPE NEW PASSWORD "} marginTop={"7%"} onChangeText={retypeNewPassword} value={setRetypeNewPassword} />
 
-            <Button height={50} text={"SAVE"} marginTop={"10%"} />
+            <Button height={50} text={"SAVE"} marginTop={"10%"} onpress={handleChangePasswordButton} />
 
         </View>
     )

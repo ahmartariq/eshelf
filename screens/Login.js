@@ -13,10 +13,10 @@ const Instagram = '../assets/pics/instagram.png'
 const Twitter = '../assets/pics/twitter.png'
 
 
-const handleLogin = () => {
-    console.log("pressed");
-
-}
+const colors = Theme.colors
+const size = Theme.size
+const title1 = Theme.title1
+const text = Theme.text
 
 
 const facebookSVG = `<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -35,10 +35,11 @@ const instagramSVG = `<svg width="20" height="20" viewBox="0 0 20 20" fill="none
 
 const Login = () => {
 
-  const colors = Theme.colors
-  const size = Theme.size
-  const title1 = Theme.title1
-  const text = Theme.text
+  const handleLogin = () => {
+    console.log("pressed");
+    console.log(email);
+    console.log(password);
+  }
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");

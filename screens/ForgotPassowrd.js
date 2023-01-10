@@ -10,17 +10,21 @@ const Facebook = '../assets/pics/facebook.png'
 const Instagram = '../assets/pics/instagram.png'
 const Twitter = '../assets/pics/twitter.png'
 
+const colors = Theme.colors
+const size = Theme.size
+const title1 = Theme.title1
+const text = Theme.text
 
-const handleLogin = () => {
 
-}
 
 const ForgotPassword = () => {
 
-  const colors = Theme.colors
-  const size = Theme.size
-  const title1 = Theme.title1
-  const text = Theme.text
+  const handleLogin = () => {
+    console.log(email);
+  }
+
+  const [email, setEmail] = useState("");
+  
 
   return (
       <View style={{   backgroundColor: colors.background , paddingTop: '10%', paddingHorizontal: 35 , flex: 1}}>
@@ -35,7 +39,7 @@ const ForgotPassword = () => {
         <Text style={title1}>Forget Password</Text>
         <Text style={{ fontSize: text.fontSize, color: text.color, marginTop: 14, fontFamily: text.fontFamily }}>Set a strong password that has atleast 8 characters a long </Text>
 
-        <Field marginTop={'15%'} placeholder={"EMAIL"} keyboardType={"email-address"} autoComplete={"email"} />
+        <Field marginTop={'15%'} placeholder={"EMAIL"} keyboardType={"email-address"} autoComplete={"email"} onChangeText={setEmail} value={email} />
 
         <Button height={54} marginTop={"76.5%"} text={"Continue"} onPress={handleLogin} />
       </View>
@@ -43,12 +47,8 @@ const ForgotPassword = () => {
 }
 
 export const OTP = () => {
-
-  const colors = Theme.colors
-  const size = Theme.size
-  const title1 = Theme.title1
-  const text = Theme.text
-  
+  const handleLogin = () => {
+  }
   return (
       <View style={{   backgroundColor: colors.background , paddingTop: '10%', paddingHorizontal: 35 , flex: 1}}>
       <View style={{flexDirection: 'row'}}>
@@ -71,10 +71,13 @@ export const OTP = () => {
 }
 
 export const ResetPassword = () =>{
-  const colors = Theme.colors
-  const size = Theme.size
-  const title1 = Theme.title1
-  const text = Theme.text
+  const handleLogin = () => {
+    console.log(password);
+    console.log(retypePassword);
+  }
+
+  const [password, setPassword] = useState("");
+  const [retypePassword, setRetypePassword] = useState("");
 
   return(
     <View style={{   backgroundColor: colors.background , paddingTop: '10%', paddingHorizontal: 35 , flex: 1}}>
@@ -88,8 +91,8 @@ export const ResetPassword = () =>{
         <Text style={title1}>Reset Password</Text>
         <Text style={{ fontSize: text.fontSize, color: text.color, marginTop: 14, fontFamily: text.fontFamily }}>Set a strong password that has at least 8 characters long.</Text>
 
-        <Password marginTop={"10%"} placeholder="PASSWORD " />
-        <Password marginTop={"5%"} placeholder={"RETYPE PASSWORD "} />
+        <Password marginTop={"10%"} placeholder="PASSWORD " onChangeText={setPassword} value={password} />
+        <Password marginTop={"5%"} placeholder={"RETYPE PASSWORD "} onChangeText={setRetypePassword} value={retypePassword} />
 
         <Button height={54} marginTop={"60%"} text={"Reset Password"} onPress={handleLogin} />
       </View>

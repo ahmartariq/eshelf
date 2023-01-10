@@ -18,7 +18,7 @@ const App = () => {
     // <ChangeEmail />
     // <Account />
     // <Address />
-    // <EditAddress />
+    <EditAddress />
     // <Payment />
     // <PaymentMethodInfo />
     // <ForgotPassword />
@@ -26,7 +26,7 @@ const App = () => {
     // <ResetPassword />
     // <Login />
     // <SignUp />
-    <ProductList />
+    // <ProductList />
     // <Product />
     // <NavigationContainer>
     //   <Tabs />
