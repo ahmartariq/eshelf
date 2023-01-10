@@ -39,14 +39,18 @@ const Login = () => {
   const size = Theme.size
   const title1 = Theme.title1
   const text = Theme.text
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
   return (
       <View style={{   backgroundColor: colors.background , paddingTop: '10%', paddingHorizontal: 35 , flex: 1}}>
         <Text style={title1}>Lets sign you in</Text>
         <Text style={{ fontSize: text.fontSize, color: text.color, marginTop: 14, fontFamily: text.fontFamily }}>Welcome Back.</Text>
         <Text style={{ fontSize: text.fontSize, color: text.color, marginTop: 4, fontFamily: text.fontFamily }}>You have been missed!</Text>
 
-        <Field marginTop={'15%'} placeholder={"EMAIL"} keyboardType={"email-address"} autoComplete={"email"} />
-        <Password marginTop={"10%"} placeholder={"PASSWORD "} />
+        <Field marginTop={'15%'} placeholder={"EMAIL"} keyboardType={"email-address"} autoComplete={"email"} onChangeText={setEmail} value={email} />
+        <Password marginTop={"10%"} placeholder={"PASSWORD "} onChangeText={setPassword} value={password} />
 
         <TouchableOpacity
           activeOpacity={0.7}
