@@ -50,7 +50,7 @@ export const Password = props => {
             <TouchableOpacity
             activeOpacity={0.7}
             style={{ width: 30 , paddingHorizontal: 5 }}
-            onPress={() => {setSecure(!secure) , console.log(secure)}}>
+            onPress={() => setSecure(!secure)}>
               <Image
                 source={secure ? HiddenEye : Eye}
               />

@@ -1,8 +1,9 @@
 import React, { useState, useRef, useEffect } from 'react'
-import { View, Text, TouchableOpacity } from 'react-native'
+import { View, Text, TouchableOpacity, Image } from 'react-native'
 import Theme from '../Theme'
 import { Button } from '../components/Button'
 import { SvgXml } from 'react-native-svg'
+import Swiper from 'react-native-swiper'
 
 const colors = Theme.colors
 const size = Theme.size
@@ -36,7 +37,26 @@ const Product = () => {
     setIsAccordion2(isAccordion2 === 'none' ? 'flex' : 'none')
   }
   return (
-    <View style={{ flex: 1, backgroundColor: "white", position: 'relative' }}>
+    <View style={{ flex: 1, backgroundColor: "white"}}>
+    <View style={{width: '100%' , height: 600}}>
+      <Swiper style={{position: 'relative'}} showsButtons={false} dotColor={colors.background} activeDotColor={colors.background} dotStyle={{width:6, height:6 , marginRight: 4}} activeDotStyle={{borderWidth: 1 , borderColor: colors.background}} paginationStyle={{flexDirection: 'column' , justifyContent: 'flex-end' ,  alignItems: 'flex-end' , height: '100%' , justifyContent: 'center' , marginRight: 10}}>
+        <View >
+          <Image source={require('../assets/pics/pic1.png')} style={{width: '100%' , height: 600}}/>
+        </View>
+        <View >
+          <Image source={require('../assets/pics/pic2.png')} style={{width: '100%' , height: 600}}/>
+        </View>
+        <View >
+          <Image source={require('../assets/pics/pic3.png')} style={{width: '100%' , height: 600}}/>
+        </View>
+        <View >
+          <Image source={require('../assets/pics/pic4.png')} style={{width: '100%' , height: 600}}/>
+        </View>
+        <View >
+          <Image source={require('../assets/pics/pic5.png')} style={{width: '100%' , height: 600}}/>
+        </View>
+      </Swiper>
+    </View>
 
       <TouchableOpacity
         onPress={() => setOpen(!open)}

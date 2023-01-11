@@ -25,9 +25,9 @@ const App = () => {
     // <OTP />
     // <ResetPassword />
     // <Login />
-    // <SignUp />
+    <SignUp />
     // <ProductList />
-    <Product />
+    // <Product />
     // <NavigationContainer>
     //   <Tabs />
     // </NavigationContainer>
