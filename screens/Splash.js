@@ -1,6 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native'
 import { SvgXml } from 'react-native-svg';
+import { NavigationContainer } from '@react-navigation/native';
 import Theme from '../Theme';
 
 const colors = Theme.colors

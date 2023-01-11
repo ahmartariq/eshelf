@@ -3,6 +3,7 @@ import { Text, View, TouchableOpacity } from 'react-native';
 import Theme from '../Theme';
 import { Button } from '../components/Button';
 import { Field, Password } from '../components/Inputs';
+import { NavigationContainer } from '@react-navigation/native';
 import { SvgXml } from 'react-native-svg';
 
 
@@ -33,12 +34,13 @@ const instagramSVG = `<svg width="20" height="20" viewBox="0 0 20 20" fill="none
 
 
 
-const Login = () => {
+const Login = ({ navigation }) => {
 
   const handleLogin = () => {
     console.log("pressed");
     console.log(email);
     console.log(password);
+    navigation.navigate('Home');
   }
 
   const [email, setEmail] = useState("");

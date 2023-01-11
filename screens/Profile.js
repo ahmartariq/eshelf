@@ -1,9 +1,11 @@
 import React, {useState} from 'react';
 import {View, Text, ScrollView, TouchableOpacity, Switch} from 'react-native';
 import {SvgXml} from 'react-native-svg';
-import { SettingLink } from '../components/SettingLink';
-import { BorderedButton } from '../components/Button';
+import {SettingLink} from '../components/SettingLink';
+import {BorderedButton} from '../components/Button';
 import Theme from '../Theme';
+
+import {NavigationContainer} from '@react-navigation/native';
 
 const colors = Theme.colors;
 const size = Theme.size;
@@ -17,23 +19,20 @@ const shapeSVG = `<svg width="430" height="212" viewBox="0 0 430 212" fill="none
 </svg>
 `;
 
-const Profile = () => {
+const Profile = ({navigation}) => {
   const [active, setActive] = useState(0);
 
   const BlockView = () => {
-    if(active === 0 ){
-        return <ProfileView/>
-    } 
-    else if(active == 1){
-        return <UserSetting />
+    if (active === 0) {
+      return <ProfileView navigation={navigation} />;
+    } else if (active == 1) {
+      return <UserSetting />;
+    } else if (active == 2) {
+      return <MyOrders />;
+    } else {
+      return <Help />;
     }
-    else if(active == 2){
-        return <MyOrders />
-    }
-    else{
-        return <Help />
-    }
-  }
+  };
 
   // console.log(active);
 
@@ -58,7 +57,7 @@ const Profile = () => {
       <View style={{paddingHorizontal: 35}}>
         <ScrollView
           horizontal={true}
-          style={{ flexDirection: 'row', marginTop: '10%'}}
+          style={{flexDirection: 'row', marginTop: '10%'}}
           showsHorizontalScrollIndicator={false}>
           {userAccountOptions.map((c, key) => (
             <TouchableOpacity
@@ -69,101 +68,153 @@ const Profile = () => {
               <Text
                 style={{
                   fontSize: size.headline,
-                  color: active === key ? colors.primary : colors.gray, fontWeight:'bold'
+                  color: active === key ? colors.primary : colors.gray,
+                  fontWeight: 'bold',
                 }}>
                 {c}
               </Text>
             </TouchableOpacity>
           ))}
         </ScrollView>
-        
+
         <BlockView />
       </View>
     </View>
   );
 };
 
-const ProfileView = () => {
-    return(
-        <View style={{marginTop:'12%'}}>   
-        <Text
-          style={{
-            fontSize: size.headline,
-            color: colors.gray,
-            fontWeight: 'bold',
-          }}>
-          MUHAMMAD SHAHZAIB K
-        </Text>
-        <Text style={{color:colors.gray, }}>IAMZAIBI905@GMAIL.COM</Text>
+const ProfileView = ({navigation}) => {
+  return (
+    <View style={{marginTop: '12%'}}>
+      <Text
+        style={{
+          fontSize: size.headline,
+          color: colors.gray,
+          fontWeight: 'bold',
+        }}>
+        MUHAMMAD SHAHZAIB K
+      </Text>
+      <Text style={{color: colors.gray}}>IAMZAIBI905@GMAIL.COM</Text>
 
-        <View style={{marginTop:'13%'}}>
-            <SettingLink textHeading={"ACCOUNT"} />
-            <SettingLink textHeading={"ADDRESS"} />
-            <SettingLink textHeading={"PAYMENT METHOD"} />
-        </View>
+      <View style={{marginTop: '13%'}}>
+        <SettingLink
+          textHeading={'ACCOUNT'}
+          onPress={() => {
+            navigation.push('Account');
+          }}
+        />
+        <SettingLink
+          textHeading={'ADDRESS'}
+          onPress={() => {
+            navigation.navigate('Address');
+          }}
+        />
+        <SettingLink
+          textHeading={'PAYMENT METHOD'}
+          onPress={() => {
+            navigation.navigate('Payment');
+          }}
+        />
+      </View>
 
-        <Text style={{marginTop:'8%', fontSize:11, textAlign: 'justify', color:colors.gray, opacity:0.7 }}>AT ESHELF WE TAKE YOUR PRIVACY VERY SERIOUSLY AND ARE COMMITED TO THE PROTECTION OF YOUR PERSONAL DATA. LEARN MORE ABOUT HOW WE CARE FOR AND USE YOUR DATEA IN OUR <Text style={{textDecorationLine: 'underline'}}>PRIVACY POLICY</Text>
-        </Text>
-        </View>
-    )
-}
-
+      <Text
+        style={{
+          marginTop: '8%',
+          fontSize: 11,
+          textAlign: 'justify',
+          color: colors.gray,
+          opacity: 0.7,
+        }}>
+        AT ESHELF WE TAKE YOUR PRIVACY VERY SERIOUSLY AND ARE COMMITED TO THE
+        PROTECTION OF YOUR PERSONAL DATA. LEARN MORE ABOUT HOW WE CARE FOR AND
+        USE YOUR DATEA IN OUR{' '}
+        <Text style={{textDecorationLine: 'underline'}}>PRIVACY POLICY</Text>
+      </Text>
+    </View>
+  );
+};
 
 const UserSetting = () => {
   const [colorSwitchValue, setColorSwitchValue] = useState(true);
   const [emailSwitchValue, setEmailSwitchValue] = useState(false);
 
-  const colorToggleSwitch = (value) => {
+  const colorToggleSwitch = value => {
     setColorSwitchValue(value);
-  }
-  const emailToggleSwitch = (value) => {
+  };
+  const emailToggleSwitch = value => {
     setEmailSwitchValue(value);
-  }
+  };
 
-    return(
-        <View style={{marginTop:"18%"}}>   
-        
-          <View style={{flexDirection:'row', justifyContent:'space-between', marginBottom:30}}>
-            <Text style={{color:colors.gray, fontSize:size.body}}>DARK  MODE</Text>
-            <Switch style={{ transform:[{scaleX: 1}, {scaleY: 1}] }} onValueChange={colorToggleSwitch} value={colorSwitchValue} thumbColor={"black"} trackColor={{true: '#D79E84', false: '#D7D7D7'}} />
-          </View>
+  return (
+    <View style={{marginTop: '18%'}}>
+      <View
+        style={{
+          flexDirection: 'row',
+          justifyContent: 'space-between',
+          marginBottom: 30,
+        }}>
+        <Text style={{color: colors.gray, fontSize: size.body}}>DARK MODE</Text>
+        <Switch
+          style={{transform: [{scaleX: 1}, {scaleY: 1}]}}
+          onValueChange={colorToggleSwitch}
+          value={colorSwitchValue}
+          thumbColor={'black'}
+          trackColor={{true: '#D79E84', false: '#D7D7D7'}}
+        />
+      </View>
 
-          <View style={{flexDirection:'row', justifyContent:'space-between'}}>
-            <Text style={{color:colors.gray, fontSize:size.body}}>NOTIFY ME</Text>
-            <Switch style={{ transform:[{scaleX: 1}, {scaleY: 1}] }} onValueChange={emailToggleSwitch} value={emailSwitchValue} thumbColor={"black"} trackColor={{true: '#D79E84', false: '#D7D7D7'}} />
-          </View>
+      <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+        <Text style={{color: colors.gray, fontSize: size.body}}>NOTIFY ME</Text>
+        <Switch
+          style={{transform: [{scaleX: 1}, {scaleY: 1}]}}
+          onValueChange={emailToggleSwitch}
+          value={emailSwitchValue}
+          thumbColor={'black'}
+          trackColor={{true: '#D79E84', false: '#D7D7D7'}}
+        />
+      </View>
 
-          <BorderedButton text={"LOGOUT"} height={50} marginTop={"25%"} />
+      <BorderedButton text={'LOGOUT'} height={50} marginTop={'25%'} />
 
-          <Text style={{marginTop:'10%', fontSize:11, textAlign: 'justify', color:colors.gray, opacity:0.7 }}>AT ESHELF WE TAKE YOUR PRIVACY VERY SERIOUSLY AND ARE COMMITED TO THE PROTECTION OF YOUR PERSONAL DATA. LEARN MORE ABOUT HOW WE CARE FOR AND USE YOUR DATEA IN OUR <Text style={{textDecorationLine: 'underline'}}>PRIVACY POLICY</Text>
-          </Text>
-
-        </View>
-    )
-}
+      <Text
+        style={{
+          marginTop: '10%',
+          fontSize: 11,
+          textAlign: 'justify',
+          color: colors.gray,
+          opacity: 0.7,
+        }}>
+        AT ESHELF WE TAKE YOUR PRIVACY VERY SERIOUSLY AND ARE COMMITED TO THE
+        PROTECTION OF YOUR PERSONAL DATA. LEARN MORE ABOUT HOW WE CARE FOR AND
+        USE YOUR DATEA IN OUR{' '}
+        <Text style={{textDecorationLine: 'underline'}}>PRIVACY POLICY</Text>
+      </Text>
+    </View>
+  );
+};
 const MyOrders = () => {
-    return(
-        <View style={{marginTop:'10%'}}>   
-          <Text style={{color:"#F8EFEB", fontSize:size.headline}}>ORDERS</Text>
-          
-
-        </View>
-    )
-}
+  return (
+    <View style={{marginTop: '10%'}}>
+      <Text style={{color: '#F8EFEB', fontSize: size.headline}}>ORDERS</Text>
+    </View>
+  );
+};
 const Help = () => {
-    return(
-        <View style={{marginTop:40, width:'100%'}}>   
-        <Text style={{fontSize: size.headline, color: colors.gray, fontWeight: 'bold',
-          }}>
-        </Text>
-            <SettingLink textHeading={'SHOP AT ESHELF.COM'} />
-            <SettingLink textHeading={'SHIPPING AND ORDER STATUS'} />
-            <SettingLink textHeading={'PAYMENT'} />
-            <SettingLink textHeading={'EXCHANGE AND RETURN'} />
-            <SettingLink textHeading={'CONTACT US'} />
-
-        </View>
-    )
-}
+  return (
+    <View style={{marginTop: 40, width: '100%'}}>
+      <Text
+        style={{
+          fontSize: size.headline,
+          color: colors.gray,
+          fontWeight: 'bold',
+        }}></Text>
+      <SettingLink textHeading={'SHOP AT ESHELF.COM'} />
+      <SettingLink textHeading={'SHIPPING AND ORDER STATUS'} />
+      <SettingLink textHeading={'PAYMENT'} />
+      <SettingLink textHeading={'EXCHANGE AND RETURN'} />
+      <SettingLink textHeading={'CONTACT US'} />
+    </View>
+  );
+};
 
 export default Profile;
