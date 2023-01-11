@@ -46,8 +46,8 @@ const Login = () => {
         .then(userCredential => {
           storeAsync(userCredential.user.uid)
           console.log("logged in");
-          setEmail('')
-          setPassword('')
+          // setEmail('')
+          // setPassword('')
           // navigation.navigate('Home',{userId:userCredential.user})
         })
         .catch(error => {

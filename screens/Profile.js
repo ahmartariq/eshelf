@@ -1,9 +1,11 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {View, Text, ScrollView, TouchableOpacity, Switch} from 'react-native';
 import {SvgXml} from 'react-native-svg';
 import { SettingLink } from '../components/SettingLink';
 import { BorderedButton } from '../components/Button';
 import Theme from '../Theme';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { getDatabase, ref, onValue, child, get } from "firebase/database";
 
 const colors = Theme.colors;
 const size = Theme.size;
@@ -19,10 +21,40 @@ const shapeSVG = `<svg width="430" height="212" viewBox="0 0 430 212" fill="none
 
 const Profile = () => {
   const [active, setActive] = useState(0);
+  const [name , setName] = useState('')
+  const [email , setEmail] = useState('')
+  const [data , setData] = useState('')
+
+
+  const asyncData = async () => {
+    try{
+      const value = await AsyncStorage.getItem('userId');
+      setData(value)
+    }catch(e){
+      throw e
+    }
+  }
+ 
+  useEffect(() => {
+    asyncData()
+
+    const dbRef = ref(getDatabase());
+    get(child(dbRef, `users/${data}`)).then((snapshot) => {
+      if (snapshot.exists()) {
+        setName(snapshot.val().name)
+        setEmail(snapshot.val().email)
+
+      } else {
+        console.log("No data available");
+      }
+    }).catch((error) => {
+      console.error(error);
+    });
+  }, [name , email])
 
   const BlockView = () => {
     if(active === 0 ){
-        return <ProfileView/>
+        return <ProfileView name={name} email={email}/>
     } 
     else if(active == 1){
         return <UserSetting />
@@ -35,7 +67,6 @@ const Profile = () => {
     }
   }
 
-  console.log(active);
   return (
     <View style={{backgroundColor: colors.background, height: '100%', flex: 1}}>
       <View>
@@ -82,7 +113,7 @@ const Profile = () => {
   );
 };
 
-const ProfileView = () => {
+const ProfileView = (props) => {
     return(
         <View style={{marginTop:'12%'}}>   
         <Text
@@ -91,9 +122,9 @@ const ProfileView = () => {
             color: colors.gray,
             fontWeight: 'bold',
           }}>
-          MUHAMMAD SHAHZAIB K
+          {props.name}
         </Text>
-        <Text style={{color:colors.gray, }}>IAMZAIBI905@GMAIL.COM</Text>
+        <Text style={{color:colors.gray, }}>{props.email}</Text>
 
         <View style={{marginTop:'13%'}}>
             <SettingLink textHeading={"ACCOUNT"} />
