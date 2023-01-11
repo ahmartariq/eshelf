@@ -24,8 +24,8 @@ const App = () => {
     // <ForgotPassword />
     // <OTP />
     // <ResetPassword />
-    // <Login />
-    <SignUp />
+    <Login />
+    // <SignUp />
     // <ProductList />
     // <Product />
     // <NavigationContainer>
