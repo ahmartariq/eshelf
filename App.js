@@ -11,6 +11,7 @@ import Tabs from './navigation/Tabs';
 import ProductList from './screens/ProductList';
 import Profile from './screens/Profile';
 import Product from './screens/Product';
+import Admin, {Users, Dashboard} from './screens/Admin';
 
 const App = () => {
   return (
