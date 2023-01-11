@@ -1,23 +1,20 @@
-import { useState, useCallback } from 'react';
+import { useState } from 'react';
 import { Text, View, TouchableOpacity } from 'react-native';
 import Theme from '../Theme';
 import { Button } from '../components/Button';
 import { Field, Password } from '../components/Inputs';
 import { SvgXml } from 'react-native-svg';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth, db } from '../FirebaseConfig';
+import { get } from 'react-native/Libraries/Utilities/PixelRatio';
+import { async } from '@firebase/util';
 
 
-
-
-const Facebook = '../assets/pics/facebook.png'
-const Instagram = '../assets/pics/instagram.png'
-const Twitter = '../assets/pics/twitter.png'
-
-
-const handleLogin = () => {
-    console.log("pressed");
-
-}
-
+const colors = Theme.colors
+const size = Theme.size
+const title1 = Theme.title1
+const text = Theme.text
 
 const facebookSVG = `<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
 <path d="M20 10.0609C20 4.50304 15.5242 0 10 0C4.47581 0 0 4.50304 0 10.0609C0 15.0824 3.65685 19.2446 8.4375 20V12.9692H5.89718V10.0609H8.4375V7.84422C8.4375 5.32292 9.92944 3.93022 12.2145 3.93022C13.3089 3.93022 14.4532 4.12657 14.4532 4.12657V6.60122H13.1919C11.95 6.60122 11.5625 7.37688 11.5625 8.17241V10.0609H14.3359L13.8923 12.9692H11.5625V20C16.3431 19.2446 20 15.0824 20 10.0609Z" fill="#E4BEAD"/>
@@ -34,46 +31,72 @@ const instagramSVG = `<svg width="20" height="20" viewBox="0 0 20 20" fill="none
 
 
 const Login = () => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [err, setErr] = useState('')
 
-  const colors = Theme.colors
-  const size = Theme.size
-  const title1 = Theme.title1
-  const text = Theme.text
+  const handleLogin = () => {
+    setErr("")
+    if (email === '')
+      setErr('Email Field is empty')
+    else if (password === '')
+      setErr('Password Field is empty')
+    else{
+        signInWithEmailAndPassword(auth, email, password)
+        .then(userCredential => {
+          storeAsync(userCredential.user.uid)
+          console.log("logged in");
+          setEmail('')
+          setPassword('')
+          // navigation.navigate('Home',{userId:userCredential.user})
+        })
+        .catch(error => {
+          setErr('Invalid Credentials!');
+        })
+    }
+    }
+
+    const storeAsync = async user => {
+      try {
+        await AsyncStorage.setItem('userId', user);
+      } catch (e) {
+        throw e;
+      }
+    }
+    
+
   return (
-      <View style={{   backgroundColor: colors.background , paddingTop: '10%', paddingHorizontal: 35 , flex: 1}}>
-        <Text style={title1}>Lets sign you in</Text>
-        <Text style={{ fontSize: text.fontSize, color: text.color, marginTop: 14, fontFamily: text.fontFamily }}>Welcome Back.</Text>
-        <Text style={{ fontSize: text.fontSize, color: text.color, marginTop: 4, fontFamily: text.fontFamily }}>You have been missed!</Text>
+    <View style={{ backgroundColor: colors.background, paddingTop: '10%', paddingHorizontal: 35, flex: 1 }}>
+      <Text style={title1}>Lets sign you in</Text>
+      <Text style={{ fontSize: text.fontSize, color: text.color, marginTop: 14, fontFamily: text.fontFamily }}>Welcome Back.</Text>
+      <Text style={{ fontSize: text.fontSize, color: text.color, marginTop: 4, fontFamily: text.fontFamily }}>You have been missed!</Text>
 
-        <Field marginTop={'15%'} placeholder={"EMAIL"} keyboardType={"email-address"} autoComplete={"email"} />
-        <Password marginTop={"10%"} placeholder={"PASSWORD "} />
-
-        <TouchableOpacity
-          activeOpacity={0.7}
-          style={{ marginTop: "5%", width: 120, alignSelf: 'flex-end' }}>
-          <Text style={{ color: colors.text, fontFamily: "rg" }}>Forgot Password?</Text>
-        </TouchableOpacity>
-        <Button height={54} marginTop={"8%"} text={"Login"} onPress={handleLogin} />
-        <View style={{ borderTopWidth: 1, borderTopColor: colors.primary, marginTop: '20%', width: '100%', alignItems: 'center' }}>
-          <Text style={{ color: colors.text, fontSize: size.body, fontFamily: 'rg', paddingTop: 20 }}>OR</Text>
-        </View>
-        <View style={{ alignItems: 'center', marginTop: 16 }}>
-          <View style={{ flexDirection: 'row' }}>
-            
-            <TouchableOpacity activeOpacity={0.7}><SvgXml xml={facebookSVG} style={{marginHorizontal:5}}  /></TouchableOpacity>
-            <TouchableOpacity activeOpacity={0.7}><SvgXml xml={twitterSVG} style={{marginHorizontal:5}} /></TouchableOpacity>
-            <TouchableOpacity activeOpacity={0.7}><SvgXml xml={instagramSVG} style={{marginHorizontal:5}} /></TouchableOpacity>
-            
-           
-          </View>
-        </View>
-        <View style={{ marginTop: '45%' , marginBottom: 20, flexDirection: 'row',  justifyContent: 'center' }}>
-            <Text style={{ color: colors.text }}>Don't have an account? </Text>
-            <TouchableOpacity activeOpacity={0.7}>
-              <Text style={{ color: colors.tertiary, textDecorationLine: 'underline' }}>Register</Text>
-            </TouchableOpacity>
-          </View>
+      <Field marginTop={'15%'} placeholder={"EMAIL"} keyboardType={"email-address"} autoComplete={"email"} value={email} onChangeText={text => setEmail(text)} />
+      <Password marginTop={"10%"} placeholder={"PASSWORD "} value={password} onChangeText={text => setPassword(text)} />
+      <Text style={{marginTop: "2%" , color: 'red' , fontSize: size.text}}>{err}</Text>
+      <TouchableOpacity
+        activeOpacity={0.7}
+        style={{ marginTop: "5%", width: 120, alignSelf: 'flex-end' }}>
+        <Text style={{ color: colors.text, fontFamily: "rg" }}>Forgot Password?</Text>
+      </TouchableOpacity>
+      <Button height={54} marginTop={"8%"} text={"Login"} onPress={handleLogin} />
+      <View style={{ borderTopWidth: 1, borderTopColor: colors.primary, marginTop: '20%', width: '100%', alignItems: 'center' }}>
+        <Text style={{ color: colors.text, fontSize: size.body, fontFamily: 'rg', paddingTop: 20 }}>OR</Text>
       </View>
+      <View style={{ alignItems: 'center', marginTop: 16 }}>
+        <View style={{ flexDirection: 'row' }}>
+          <TouchableOpacity activeOpacity={0.7}><SvgXml xml={facebookSVG} style={{ marginHorizontal: 5 }} /></TouchableOpacity>
+          <TouchableOpacity activeOpacity={0.7}><SvgXml xml={twitterSVG} style={{ marginHorizontal: 5 }} /></TouchableOpacity>
+          <TouchableOpacity activeOpacity={0.7}><SvgXml xml={instagramSVG} style={{ marginHorizontal: 5 }} /></TouchableOpacity>
+        </View>
+      </View>
+      <View style={{ marginTop: '45%', marginBottom: 20, flexDirection: 'row', justifyContent: 'center' }}>
+        <Text style={{ color: colors.text }}>Don't have an account? </Text>
+        <TouchableOpacity activeOpacity={0.7}>
+          <Text style={{ color: colors.tertiary, textDecorationLine: 'underline' }}>Register</Text>
+        </TouchableOpacity>
+      </View>
+    </View>
   )
 }
 

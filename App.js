@@ -15,9 +15,6 @@ import Admin, {Users, Dashboard} from './screens/Admin';
 
 const App = () => {
   return (
-    <Dashboard/>
-    //<Users/>
-    //<Admin/>
     // <ChangePassword />
     // <ChangeEmail />
     // <Account />
@@ -28,10 +25,10 @@ const App = () => {
     // <ForgotPassword />
     // <OTP />
     // <ResetPassword />
-    // <Login />
+    <Login />
     // <SignUp />
     // <ProductList />
-    //<Product />
+    // <Product />
     // <NavigationContainer>
     //   <Tabs />
     // </NavigationContainer>
