@@ -32,7 +32,7 @@ const App = () => {
     // <OTP />
     // <ResetPassword />
     // <Login />
-    // <SignUp />
+    <SignUp />
     // <ProductList />
     // <Product />
     // <NavigationContainer>
