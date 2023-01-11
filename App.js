@@ -25,14 +25,14 @@ const App = () => {
     // <ForgotPassword />
     // <OTP />
     // <ResetPassword />
-    <Login />
+    // <Login />
     // <SignUp />
     // <ProductList />
     // <Product />
     // <NavigationContainer>
     //   <Tabs />
     // </NavigationContainer>
-    // <Profile />
+    <Profile />
   );
 };
 
