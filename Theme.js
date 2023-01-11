@@ -8,6 +8,12 @@ const Theme = {
         text : "#F8EFEB",
         gray : "#D9D9D9"
     },
+
+    fonts : {
+        regular: 'GT-America-Regular',
+        medium: 'GT-America-Medium',
+    },
+
     size: {
         title1 : 28,
         title2 : 22,
@@ -25,6 +31,11 @@ const Theme = {
         fontSize: 28,
         color :'#EBCFC2',
         fontFamily: 'GT-America-Medium'
+    },
+    title3 : {
+        fontSize: 20,
+        color :'#D2D2D2',
+        fontFamily: 'GT-America-Regular'
     },
     title1Black : {
         fontSize: 28,

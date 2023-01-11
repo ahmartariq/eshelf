@@ -11,6 +11,7 @@ import Tabs from './navigation/Tabs';
 import ProductList from './screens/ProductList';
 import Profile from './screens/Profile';
 import Product from './screens/Product';
+import Admin, {Users, Dashboard} from './screens/Admin';
 
 const App = () => {
   return (
@@ -24,16 +25,14 @@ const App = () => {
     // <ForgotPassword />
     // <OTP />
     // <ResetPassword />
-    // <Login />
+    <Login />
     // <SignUp />
-    <ProductList />
+    // <ProductList />
     // <Product />
     // <NavigationContainer>
     //   <Tabs />
     // </NavigationContainer>
-
     // <Profile />
-
   );
 };
 
