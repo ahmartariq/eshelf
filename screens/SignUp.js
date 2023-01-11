@@ -46,6 +46,11 @@ const SignUp = () => {
         writeUserData(email, name, userCredential.user.uid);
         // navigation.navigate('Login');
         setErr("")
+        setName("")
+        setEmail("")
+        setReEmail("")
+        setPassword("")
+        setRePassword("")
       })
       .catch(error => {
         if(error = 'Password should be at least 6 characters (auth/weak-password)') setErr('Password should be at least 6 characters')
