@@ -11,9 +11,13 @@ import Tabs from './navigation/Tabs';
 import ProductList from './screens/ProductList';
 import Profile from './screens/Profile';
 import Product from './screens/Product';
+import Admin, {Users, Dashboard} from './screens/Admin';
 
 const App = () => {
   return (
+    <Dashboard/>
+    //<Users/>
+    //<Admin/>
     // <ChangePassword />
     // <ChangeEmail />
     // <Account />
@@ -27,7 +31,7 @@ const App = () => {
     // <Login />
     // <SignUp />
     // <ProductList />
-    <Product />
+    //<Product />
     // <NavigationContainer>
     //   <Tabs />
     // </NavigationContainer>
