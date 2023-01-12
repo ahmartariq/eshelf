@@ -1,74 +1,205 @@
-import { Text, TextInput, View, Image, TouchableOpacity, ScrollView, Alert } from 'react-native';
+import {useState} from 'react';
+import {
+  Text,
+  TextInput,
+  View,
+  Image,
+  TouchableOpacity,
+  ScrollView,
+  Alert,
+} from 'react-native';
 import Theme from '../Theme';
 import {SettingLink} from '../components/SettingLink';
-import { Field, Password } from '../components/Inputs';
-import { Button } from '../components/Button';
-import { useState } from 'react';
+import {Field, Password} from '../components/Inputs';
+import {Button} from '../components/Button';
 
-const colors = Theme.colors
-const size = Theme.size
-const title1 = Theme.title1
-const text = Theme.text
+import {NavigationContainer} from '@react-navigation/native';
+import {navigate} from '@react-navigation/routers/lib/typescript/src/CommonActions';
+
+const colors = Theme.colors;
+const size = Theme.size;
+const title1 = Theme.title1;
+const text = Theme.text;
 
 const handleButton = () => {
-    alert("handle")
+  alert('handle');
 };
 
-const Account = () => {
+const Account = ({navigation}) => {
+  return (
+    <View
+      style={{
+        backgroundColor: colors.background,
+        paddingTop: '10%',
+        paddingHorizontal: 35,
+        flex: 1,
+      }}>
+      <TouchableOpacity
+        onPress={() => {
+          navigation.pop();
+        }}>
+        <Image
+          style={{marginTop: 9, width: 18, height: 18}}
+          source={require('../assets/pics/backarrow.png')}></Image>
+      </TouchableOpacity>
+      <Text
+        style={{
+          marginBottom: 71,
+          marginTop: 21,
+          fontSize: 28,
+          color: '#F8EFEB',
+          fontFamily: 'GT-America-Medium',
+        }}>
+        Account
+      </Text>
+      <SettingLink
+        textHeading={'CHANGE EMAIL'}
+        onPress={() => {
+          navigation.push('ChangeEmail');
+        }}
+      />
+      <SettingLink
+        textHeading={'CHANGE PASSWORD'}
+        onPress={() => {
+          navigation.push('ChangePassword');
+        }}
+      />
+    </View>
+  );
+};
 
-    return(
-        <View style={{ backgroundColor: colors.background , paddingTop: '10%', paddingHorizontal: 35 , flex: 1}}>
-            <Image style={{marginTop:9, width:18, height:18 }} source={require("../assets/pics/backarrow.png")}></Image>
-            <Text style={{marginBottom:71, marginTop:21, fontSize:28 ,color:'#F8EFEB', fontFamily: 'GT-America-Medium'}}>Account</Text>
-            <SettingLink textHeading={"CHANGE EMAIL"} onpress={handleButton}/>
-            <SettingLink textHeading={"CHANGE PASSWORD"} onpress={handleButton}/>
-        </View> 
-    )
-}
+export const ChangeEmail = ({navigation}) => {
+  const [currentPassword, setCurrentPassword] = useState('');
+  const [newEmail, setNewEmail] = useState('');
+  const [retypeNewEmail, setRetypeNewEmail] = useState('');
 
+  return (
+    <View
+      style={{
+        backgroundColor: colors.background,
+        paddingTop: '10%',
+        paddingHorizontal: 35,
+        flex: 1,
+      }}>
+      <TouchableOpacity
+        onPress={() => {
+          navigation.pop();
+        }}>
+        <Image
+          style={{marginTop: 9, width: 18, height: 18}}
+          source={require('../assets/pics/backarrow.png')}></Image>
+      </TouchableOpacity>
+      <Text
+        style={{
+          marginBottom: 12,
+          marginTop: 21,
+          fontSize: 28,
+          color: '#F8EFEB',
+          fontFamily: 'GT-America-Medium',
+        }}>
+        CHANGE EMAIL
+      </Text>
+      <Text style={{color: colors.gray, marginBottom: 36}}>
+        YOUR CURRENT EMAIL ADDRESS{' '}
+        <Text style={{fontWeight: 'bold'}}>IAMZAIBI905@GMAIL.COM</Text>
+      </Text>
 
-export const ChangeEmail = () => {
+      <Password
+        placeholder={'CURRENT PASSWORD '}
+        onChangeText={setCurrentPassword}
+        value={currentPassword}
+      />
 
-    const [currentPassword, setCurrentPassword] = useState('');
-    const [newEmail, setnNewEmail] = useState('');
-    const [retypeNewEmail, setRetypeNewEmail] = useState('');
+      <Field
+        placeholder={'NEW EMAIL'}
+        marginTop={'7%'}
+        onChangeText={setNewEmail}
+        value={newEmail}
+      />
 
-    return(
-        <View style={{ backgroundColor: colors.background , paddingTop: '10%', paddingHorizontal: 35 , flex: 1}}>
-            <Image style={{marginTop:9, width:18, height:18 }} source={require("../assets/pics/backarrow.png")}></Image>
-            <Text style={{marginBottom:12, marginTop:21, fontSize:28 ,color:'#F8EFEB', fontFamily: 'GT-America-Medium'}}>CHANGE EMAIL</Text>
-            <Text style={{color:colors.gray, marginBottom:36 }}>YOUR CURRENT EMAIL ADDRESS <Text style={{fontWeight:'bold'}}>IAMZAIBI905@GMAIL.COM</Text></Text>
-            
-            <Password placeholder={"CURRENT PASSWORD "} onChangeText={setCurrentPassword} value={currentPassword} />  
+      <Field
+        placeholder={'RETYPE NEW EMAIL'}
+        marginTop={'7%'}
+        onChangeText={setRetypeNewEmail}
+        value={retypeNewEmail}
+      />
 
-            <Field placeholder={"NEW EMAIL"} marginTop={"7%"} onChangeText={setnNewEmail} value={newEmail} />
-            
-            <Field placeholder={"RETYPE NEW EMAIL"} marginTop={"7%"} onChangeText={setRetypeNewEmail} value={retypeNewEmail} />
+      <Button
+        height={50}
+        text={'SAVE'}
+        marginTop={'10%'}
+        onPress={() => {
+          navigation.popToTop();
+        }}
+      />
+    </View>
+  );
+};
 
-            <Button height={50} text={"SAVE"} marginTop={"10%"} />
+export const ChangePassword = ({navigation}) => {
+  const handleChangePasswordButton = () => {
+    console.log(currentPassword);
+    console.log(newPassword);
+    console.log(retypeNewPassword);
+  };
 
-        </View>
-    )
-}
+  const [currentPassword, setCurrentPassword] = useState('');
+  const [newPassword, setNewPassword] = useState('');
+  const [retypeNewPassword, setRetypeNewPassword] = useState('');
 
+  return (
+    <View
+      style={{
+        backgroundColor: colors.background,
+        paddingTop: '10%',
+        paddingHorizontal: 35,
+        flex: 1,
+      }}>
+      <TouchableOpacity
+        onPress={() => {
+          navigation.pop();
+        }}>
+        <Image
+          style={{marginTop: 9, width: 18, height: 18}}
+          source={require('../assets/pics/backarrow.png')}></Image>
+      </TouchableOpacity>
+      <Text
+        style={{
+          marginBottom: 80,
+          marginTop: 21,
+          fontSize: 28,
+          color: '#F8EFEB',
+          fontFamily: 'GT-America-Medium',
+        }}>
+        CHANGE PASSWORD
+      </Text>
 
-export const ChangePassword = () => {
+      <Password placeholder={'CURRENT PASSWORD '} />
 
-    return(
-        <View style={{ backgroundColor: colors.background , paddingTop: '10%', paddingHorizontal: 35 , flex: 1}}>
-            <Image style={{marginTop:9, width:18, height:18 }} source={require("../assets/pics/backarrow.png")}></Image>
-            <Text style={{marginBottom:80, marginTop:21, fontSize:28 ,color:'#F8EFEB', fontFamily: 'GT-America-Medium'}}>CHANGE PASSWORD</Text>
-            
-            <Password placeholder={"CURRENT PASSWORD "}  />  
+      <Password
+        placeholder={'NEW PASSWORD '}
+        marginTop={'7%'}
+        onChangeText={newPassword}
+        value={setNewPassword}
+      />
 
-            <Password placeholder={"NEW PASSWORD "} marginTop={"7%"} />
-            
-            <Password placeholder={"RETYPE NEW PASSWORD "} marginTop={"7%"} />
+      <Password
+        placeholder={'RETYPE NEW PASSWORD '}
+        marginTop={'7%'}
+        onChangeText={retypeNewPassword}
+        value={setRetypeNewPassword}
+      />
 
-            <Button height={50} text={"SAVE"} marginTop={"10%"} />
-
-        </View>
-    )
-}
+      <Button
+        height={50}
+        text={'SAVE'}
+        marginTop={'10%'}
+        onPress={() => {
+          navigation.popToTop();
+        }}
+      />
+    </View>
+  );
+};
 
 export default Account;
