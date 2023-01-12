@@ -1,11 +1,20 @@
-import React, {useState} from 'react';
-import {View, Text, ScrollView, TouchableOpacity, Switch} from 'react-native';
+import React, {useEffect, useState} from 'react';
+import {
+  View,
+  Text,
+  ScrollView,
+  TouchableOpacity,
+  Switch,
+  Alert,
+} from 'react-native';
 import {SvgXml} from 'react-native-svg';
 import {SettingLink} from '../components/SettingLink';
 import {BorderedButton} from '../components/Button';
 import Theme from '../Theme';
-
-import {NavigationContainer} from '@react-navigation/native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import {getDatabase, ref, onValue, child, get} from 'firebase/database';
+import {signOut} from '@firebase/auth';
+import {auth} from '../FirebaseConfig';
 
 const colors = Theme.colors;
 const size = Theme.size;
@@ -21,16 +30,42 @@ const shapeSVG = `<svg width="430" height="212" viewBox="0 0 430 212" fill="none
 
 const Profile = ({navigation}) => {
   const [active, setActive] = useState(0);
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [data, setData] = useState('');
+
+  const asyncData = async () => {
+    try {
+      const value = await AsyncStorage.getItem('userId');
+      setData(value);
+    } catch (e) {
+      throw e;
+    }
+  };
+
+  useEffect(() => {
+    asyncData();
+
+    const dbRef = ref(getDatabase());
+    get(child(dbRef, `users/${data}`))
+      .then(snapshot => {
+        if (snapshot.exists()) {
+          setName(snapshot.val().name);
+          setEmail(snapshot.val().email);
+        } else {
+          console.log('No data available');
+        }
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  }, [name, email]);
 
   const BlockView = () => {
     if (active === 0) {
-      return <ProfileView navigation={navigation} />;
+      return <ProfileView name={name} email={email} navigation={navigation} />;
     } else if (active == 1) {
       return <UserSetting />;
-    } else if (active == 2) {
-      return <MyOrders />;
-    } else {
-      return <Help />;
     }
   };
 
@@ -76,14 +111,14 @@ const Profile = ({navigation}) => {
             </TouchableOpacity>
           ))}
         </ScrollView>
-
         <BlockView />
       </View>
     </View>
   );
 };
 
-const ProfileView = ({navigation}) => {
+const ProfileView = props => {
+  const navigation = props.navigation;
   return (
     <View style={{marginTop: '12%'}}>
       <Text
@@ -92,9 +127,9 @@ const ProfileView = ({navigation}) => {
           color: colors.gray,
           fontWeight: 'bold',
         }}>
-        MUHAMMAD SHAHZAIB K
+        {props.name}
       </Text>
-      <Text style={{color: colors.gray}}>IAMZAIBI905@GMAIL.COM</Text>
+      <Text style={{color: colors.gray}}>{props.email}</Text>
 
       <View style={{marginTop: '13%'}}>
         <SettingLink
@@ -106,13 +141,13 @@ const ProfileView = ({navigation}) => {
         <SettingLink
           textHeading={'ADDRESS'}
           onPress={() => {
-            navigation.navigate('Address');
+            navigation.push('Address');
           }}
         />
         <SettingLink
           textHeading={'PAYMENT METHOD'}
           onPress={() => {
-            navigation.navigate('Payment');
+            navigation.push('Payment');
           }}
         />
       </View>
@@ -145,6 +180,36 @@ const UserSetting = () => {
     setEmailSwitchValue(value);
   };
 
+  const logoutAlert = () => {
+    Alert.alert(
+      'Log Out',
+      'Are you sure?',
+      [
+        {
+          text: 'Log Out',
+          onPress: () => {
+            Alert.alert('Logged Out.');
+            signOut(auth)
+              .then(() => {
+                console.log('Signed out');
+              })
+              .catch(err => {
+                console.log(err);
+              });
+          },
+          style: 'Cancel',
+        },
+        {
+          text: 'Cancel',
+          style: 'Cancel',
+        },
+      ],
+      {
+        cancelable: true,
+      },
+    );
+  };
+
   return (
     <View style={{marginTop: '18%'}}>
       <View
@@ -174,7 +239,14 @@ const UserSetting = () => {
         />
       </View>
 
-      <BorderedButton text={'LOGOUT'} height={50} marginTop={'25%'} />
+      <BorderedButton
+        text={'LOGOUT'}
+        height={50}
+        marginTop={'25%'}
+        onPress={() => {
+          logoutAlert();
+        }}
+      />
 
       <Text
         style={{
@@ -192,6 +264,7 @@ const UserSetting = () => {
     </View>
   );
 };
+
 const MyOrders = () => {
   return (
     <View style={{marginTop: '10%'}}>

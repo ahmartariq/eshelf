@@ -13,7 +13,7 @@ const size = Theme.size;
 const title1 = Theme.title1;
 const text = Theme.text;
 
-const Address = () => {
+const Address = ({navigation}) => {
   const [name, setName] = useState('');
 
   return (
@@ -46,12 +46,17 @@ const Address = () => {
         }}>
         MUHAMMAD SHAHZAIB K
       </Text>
-      <SettingLink textHeading={'PAKISTAN'} />
+      <SettingLink
+        textHeading={'PAKISTAN'}
+        onPress={() => {
+          navigation.push('EditAddress');
+        }}
+      />
     </View>
   );
 };
 
-export const EditAddress = () => {
+export const EditAddress = ({navigation}) => {
   const [selectedValue, setSelectedValue] = useState('');
 
   return (
@@ -82,9 +87,20 @@ export const EditAddress = () => {
       <SmallLabel LabelHeading={'LAST NAME'} />
       <Field placeholder={'LAST NAME'} marginBottom={12} />
 
-      <View style={{width: '100%' ,borderWidth: 1, borderColor:colors.background, borderBottomColor:colors.primary, marginBottom:12}}>
-        <Picker selectedValue={selectedValue} style={{ color: '#646261', fontSize: size.body }}
-          onValueChange={(itemValue, itemIndex) => setSelectedValue(itemValue)} prompt="CHOOSE YOUR COUNTRY"  itemStyle={{ color: 'red' }}>
+      <View
+        style={{
+          width: '100%',
+          borderWidth: 1,
+          borderColor: colors.background,
+          borderBottomColor: colors.primary,
+          marginBottom: 12,
+        }}>
+        <Picker
+          selectedValue={selectedValue}
+          style={{color: '#646261', fontSize: size.body}}
+          onValueChange={(itemValue, itemIndex) => setSelectedValue(itemValue)}
+          prompt="CHOOSE YOUR COUNTRY"
+          itemStyle={{color: 'red'}}>
           <Picker.Item label="PAKISTAN" value="PAKISTAN" />
           <Picker.Item label="DUBAI" value="DUBAI" />
           <Picker.Item label="SAUDIA" value="SAUDIA" />
@@ -104,21 +120,13 @@ export const EditAddress = () => {
       <SmallLabel LabelHeading={'PHONE NUMBER'} />
       <Field placeholder={'PHONE NUMBER'} marginBottom={40} />
 
-      <Text
-        style={{
-          fontFamily: 'GT-America-Light',
-          fontSize: 10.69,
-          color: colors.gray,
-          lineHeight: 15,
-          marginBottom: 40,
-        }}>
-        AT ESHELFT WE TAKE YOUR PRIVACY VERY SERIOUSLY AND AER COMMITED TO THE
-        PROTECTION OF YOUR PERSONAL DATA. LEARN MORE ABOUT HOW WE CARE AND USE
-        YOUR DATA IN OUR{' '}
-        <Text style={{textDecorationLine: 'underline'}}>PRIVACY POLICY</Text>{' '}
-      </Text>
-
-      <Button text={'SAVE ADDRESS'} height={53} />
+      <Button
+        text={'SAVE ADDRESS'}
+        height={53}
+        onPress={() => {
+          navigation.popToTop();
+        }}
+      />
     </ScrollView>
   );
 };

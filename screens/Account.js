@@ -14,6 +14,7 @@ import {Field, Password} from '../components/Inputs';
 import {Button} from '../components/Button';
 
 import {NavigationContainer} from '@react-navigation/native';
+import {navigate} from '@react-navigation/routers/lib/typescript/src/CommonActions';
 
 const colors = Theme.colors;
 const size = Theme.size;
@@ -35,7 +36,7 @@ const Account = ({navigation}) => {
       }}>
       <TouchableOpacity
         onPress={() => {
-          navigation.navigate('Profile');
+          navigation.pop();
         }}>
         <Image
           style={{marginTop: 9, width: 18, height: 18}}
@@ -51,19 +52,23 @@ const Account = ({navigation}) => {
         }}>
         Account
       </Text>
-      <SettingLink textHeading={'CHANGE EMAIL'} onpress={handleButton} />
-      <SettingLink textHeading={'CHANGE PASSWORD'} onpress={handleButton} />
+      <SettingLink
+        textHeading={'CHANGE EMAIL'}
+        onPress={() => {
+          navigation.push('ChangeEmail');
+        }}
+      />
+      <SettingLink
+        textHeading={'CHANGE PASSWORD'}
+        onPress={() => {
+          navigation.push('ChangePassword');
+        }}
+      />
     </View>
   );
 };
 
-export const ChangeEmail = () => {
-  const handleChangeEmailButton = () => {
-    console.log(currentPassword);
-    console.log(newEmail);
-    console.log(retypeNewEmail);
-  };
-
+export const ChangeEmail = ({navigation}) => {
   const [currentPassword, setCurrentPassword] = useState('');
   const [newEmail, setNewEmail] = useState('');
   const [retypeNewEmail, setRetypeNewEmail] = useState('');
@@ -76,9 +81,14 @@ export const ChangeEmail = () => {
         paddingHorizontal: 35,
         flex: 1,
       }}>
-      <Image
-        style={{marginTop: 9, width: 18, height: 18}}
-        source={require('../assets/pics/backarrow.png')}></Image>
+      <TouchableOpacity
+        onPress={() => {
+          navigation.pop();
+        }}>
+        <Image
+          style={{marginTop: 9, width: 18, height: 18}}
+          source={require('../assets/pics/backarrow.png')}></Image>
+      </TouchableOpacity>
       <Text
         style={{
           marginBottom: 12,
@@ -118,13 +128,15 @@ export const ChangeEmail = () => {
         height={50}
         text={'SAVE'}
         marginTop={'10%'}
-        onpress={handleChangeEmailButton}
+        onPress={() => {
+          navigation.popToTop();
+        }}
       />
     </View>
   );
 };
 
-export const ChangePassword = () => {
+export const ChangePassword = ({navigation}) => {
   const handleChangePasswordButton = () => {
     console.log(currentPassword);
     console.log(newPassword);
@@ -143,9 +155,14 @@ export const ChangePassword = () => {
         paddingHorizontal: 35,
         flex: 1,
       }}>
-      <Image
-        style={{marginTop: 9, width: 18, height: 18}}
-        source={require('../assets/pics/backarrow.png')}></Image>
+      <TouchableOpacity
+        onPress={() => {
+          navigation.pop();
+        }}>
+        <Image
+          style={{marginTop: 9, width: 18, height: 18}}
+          source={require('../assets/pics/backarrow.png')}></Image>
+      </TouchableOpacity>
       <Text
         style={{
           marginBottom: 80,
@@ -177,7 +194,9 @@ export const ChangePassword = () => {
         height={50}
         text={'SAVE'}
         marginTop={'10%'}
-        onpress={handleChangePasswordButton}
+        onPress={() => {
+          navigation.popToTop();
+        }}
       />
     </View>
   );

@@ -9,6 +9,7 @@ import Menu from '../screens/Menu';
 import {SvgXml} from 'react-native-svg';
 import Theme from '../Theme';
 import ProfileNavigation from './ProfileNavigation';
+import {NavigationContainer} from '@react-navigation/native';
 
 const Tab = createBottomTabNavigator();
 
@@ -125,55 +126,61 @@ stroke= ${colors.text} stroke-width="3" stroke-linecap="round" stroke-linejoin="
   );
 
   return (
-    <Tab.Navigator
-      screenOptions={{
-        tabBarStyle: {
-          backgroundColor: colors.primary,
-          position: 'absolute',
-          marginBottom: 30,
-          marginHorizontal: 22,
-          borderRadius: 30,
-          height: 63,
-        },
-        tabBarShowLabel: false,
-        headerShown: false,
-      }}>
-      <Tab.Screen
-        name="Home"
-        component={Home}
-        options={{
-          tabBarIcon: homeIcon,
-        }}
-      />
-      <Tab.Screen
-        name="Search"
-        component={Search}
-        options={{
-          tabBarIcon: searchIcon,
-        }}
-      />
-      <Tab.Screen
-        name="Menu"
-        component={Menu}
-        options={{
-          tabBarIcon: menuIcon,
-        }}
-      />
-      <Tab.Screen
-        name="Profile"
-        component={ProfileNavigation}
-        options={{
-          tabBarIcon: profileIcon,
-        }}
-      />
-      <Tab.Screen
-        name="Cart"
-        component={Cart}
-        options={{
-          tabBarIcon: cartIcon,
-        }}
-      />
-    </Tab.Navigator>
+    <NavigationContainer>
+      <Tab.Navigator
+        screenOptions={{
+          tabBarStyle: {
+            backgroundColor: colors.primary,
+            position: 'absolute',
+            marginBottom: 30,
+            marginHorizontal: 22,
+            borderRadius: 30,
+            height: 63,
+          },
+          tabBarShowLabel: false,
+          headerShown: false,
+        }}>
+        <Tab.Screen
+          name="Home"
+          component={Home}
+          options={{
+            tabBarIcon: homeIcon,
+          }}
+        />
+        <Tab.Screen
+          name="Search"
+          component={Search}
+          options={{
+            tabBarIcon: searchIcon,
+          }}
+        />
+        <Tab.Screen
+          name="Menu"
+          component={Menu}
+          options={{
+            tabBarIcon: menuIcon,
+          }}
+        />
+        <Tab.Screen
+          name="Profile"
+          component={ProfileNavigation}
+          options={{
+            tabBarIcon: profileIcon,
+            tabBarStyle:{
+                display:"none"
+
+            }
+          }}
+        />
+        <Tab.Screen
+          name="Cart"
+          component={Cart}
+          options={{
+            tabBarIcon: cartIcon,
+          }}
+        />
+      </Tab.Navigator>
+    </NavigationContainer>
   );
 };
 
