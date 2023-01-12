@@ -108,7 +108,7 @@ const ProductList = () => {
 </svg>`
 
     return (
-        <ScrollView style={{ backgroundColor: colors.background, paddingTop: '10%', paddingHorizontal: 15, flex: 1 }}>
+        <ScrollView style={{ backgroundColor: colors.background, paddingTop: '10%', paddingHorizontal: 10, flex: 1 }}>
             <View style={{ flexDirection: 'row' }}>
                 <View>
                     <TouchableOpacity activeOpacity={0.7} >
@@ -132,10 +132,8 @@ const ProductList = () => {
             <View style={{flexWrap : 'wrap' , width: '100%' ,  flexDirection: 'row' , paddingBottom :80}}>
             { select.length > 0 ?
                 select.map((sel, key) => (
-                    <TouchableOpacity activeOpacity={0.9} key={key} style={ key % 4 === 0 && key !==0 ?  { width: "100%", marginVertical : 9.5} :{ width: "45%" , margin : 9.5}}>
-                    {/* <View style={{width : '100%' , height: '59%' , overflow : 'hidden'}}> */}
-                    <Image  source={sel.image} style={key % 4 === 0 && key !==0 ? {width: '100%' }  : {width: 180 , height: 250}}/>
-                    {/* </View> */}
+                    <TouchableOpacity activeOpacity={0.9} key={key} style={ key % 4 === 0 && key !==0 ?  { width: "100%", marginVertical : 9.5} :{ width: "44%" , margin : 9.5 , overflow: 'hidden'}}>
+                    <Image  source={sel.image} style={key % 4 === 0 && key !==0 ? {width: '100%' }  : {width: '100%' , height: 200}}/>
                     <Text style={{color : colors.text, fontFamily : 'GT-America-Regular' , fontSize : 12 , marginTop : 4}}>{sel.name}</Text>
                     <Text style={{color : colors.primary, fontFamily : 'GT-America-Regular' , fontSize : 10 , marginTop : 4}}>Rs. {sel.price}</Text>
                 </TouchableOpacity>
@@ -150,13 +148,3 @@ const ProductList = () => {
 }
 
 export default ProductList
-
-
-//  /* value.filter((val, index , self) => index === self.findIndex(t=> t.color === val.color)).map((c, key) => ( 
-//                         <TouchableOpacity style={{ marginRight: 30 }} activeOpacity={0.7} key={key} onPress={() => setActive(key)} >
-//                             <Text style={{ fontSize: size.headline, color: active === key ? colors.primary : colors.gray }}>{c.color}</Text>
-//                         </TouchableOpacity>
-//                     )) */
-
-
-//

@@ -4,6 +4,7 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Home from '../screens/Home';
 import Search from '../screens/Search';
 import Cart from '../screens/Cart';
+import ProductList from '../screens/ProductList';
 import Profile from '../screens/Profile';
 import Menu from '../screens/Menu';
 import {SvgXml} from 'react-native-svg';
@@ -152,11 +153,12 @@ stroke= ${colors.text} stroke-width="3" stroke-linecap="round" stroke-linejoin="
           component={Search}
           options={{
             tabBarIcon: searchIcon,
+            tabBarHideOnKeyboard: true
           }}
         />
         <Tab.Screen
           name="Menu"
-          component={Menu}
+          component={ProductList}
           options={{
             tabBarIcon: menuIcon,
           }}
@@ -166,10 +168,6 @@ stroke= ${colors.text} stroke-width="3" stroke-linecap="round" stroke-linejoin="
           component={ProfileNavigation}
           options={{
             tabBarIcon: profileIcon,
-            tabBarStyle:{
-                display:"none"
-
-            }
           }}
         />
         <Tab.Screen

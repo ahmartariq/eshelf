@@ -17,14 +17,11 @@ export default function ProfileNavigation() {
         initialRouteName="Profile"
         screenOptions={{headerShown: false}}>
         <Stack.Screen name="Profile" component={Profile} />
-
         <Stack.Screen name="Account" component={Account} />
         <Stack.Screen name="ChangeEmail" component={ChangeEmail} />
         <Stack.Screen name="ChangePassword" component={ChangePassword} />
-
         <Stack.Screen name="Address" component={Address} />
         <Stack.Screen name="EditAddress" component={EditAddress} />
-
         <Stack.Screen name="Payment" component={Payment} />
         <Stack.Screen name="PaymentMethodInfo" component={PaymentMethodInfo} />
       </Stack.Navigator>

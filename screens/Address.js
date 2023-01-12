@@ -1,5 +1,5 @@
 import {Component, useState} from 'react';
-import {Text, View, Image, ScrollView} from 'react-native';
+import {Text, View, Image, ScrollView , TouchableOpacity} from 'react-native';
 import Theme from '../Theme';
 import {SettingLink} from '../components/SettingLink';
 import {Field, Password} from '../components/Inputs';
@@ -24,9 +24,14 @@ const Address = ({navigation}) => {
         paddingHorizontal: 35,
         flex: 1,
       }}>
-      <Image
-        style={{marginTop: 9, width: 18, height: 18}}
-        source={require('../assets/pics/backarrow.png')}></Image>
+      <TouchableOpacity
+        onPress={() => {
+          navigation.pop();
+        }}>
+        <Image
+          style={{marginTop: 9, width: 18, height: 18}}
+          source={require('../assets/pics/backarrow.png')} />
+      </TouchableOpacity>
       <Text
         style={{
           marginBottom: 80,

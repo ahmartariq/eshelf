@@ -11,7 +11,7 @@ import {SvgXml} from 'react-native-svg';
 import {SettingLink} from '../components/SettingLink';
 import {BorderedButton} from '../components/Button';
 import Theme from '../Theme';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import AsyncStorage, { useAsyncStorage } from '@react-native-async-storage/async-storage';
 import {getDatabase, ref, onValue, child, get} from 'firebase/database';
 import {signOut} from '@firebase/auth';
 import {auth} from '../FirebaseConfig';
@@ -72,7 +72,7 @@ const Profile = ({navigation}) => {
   // console.log(active);
 
   return (
-    <View style={{backgroundColor: colors.background, height: '100%', flex: 1}}>
+    <ScrollView style={{backgroundColor: colors.background, height: '100%', flex: 1 , paddingBottom: 100}}>
       <View>
         <SvgXml xml={shapeSVG} />
         <Text
@@ -113,14 +113,14 @@ const Profile = ({navigation}) => {
         </ScrollView>
         <BlockView />
       </View>
-    </View>
+    </ScrollView>
   );
 };
 
 const ProfileView = props => {
   const navigation = props.navigation;
   return (
-    <View style={{marginTop: '12%'}}>
+    <ScrollView style={{marginTop: '12%' , marginBottom: 150}}>
       <Text
         style={{
           fontSize: size.headline,
@@ -165,7 +165,7 @@ const ProfileView = props => {
         USE YOUR DATEA IN OUR{' '}
         <Text style={{textDecorationLine: 'underline'}}>PRIVACY POLICY</Text>
       </Text>
-    </View>
+    </ScrollView>
   );
 };
 
@@ -191,7 +191,7 @@ const UserSetting = () => {
             Alert.alert('Logged Out.');
             signOut(auth)
               .then(() => {
-                console.log('Signed out');
+                const value = AsyncStorage.removeItem('userId')
               })
               .catch(err => {
                 console.log(err);
@@ -211,7 +211,7 @@ const UserSetting = () => {
   };
 
   return (
-    <View style={{marginTop: '18%'}}>
+    <ScrollView style={{marginTop: '18%' ,marginBottom: 150}}>
       <View
         style={{
           flexDirection: 'row',
@@ -261,7 +261,7 @@ const UserSetting = () => {
         USE YOUR DATEA IN OUR{' '}
         <Text style={{textDecorationLine: 'underline'}}>PRIVACY POLICY</Text>
       </Text>
-    </View>
+    </ScrollView>
   );
 };
 
