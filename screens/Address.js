@@ -1,19 +1,19 @@
-import { Component, useState } from 'react';
-import { Text, View, Image, ScrollView, TouchableOpacity } from 'react-native';
+import {Component, useState} from 'react';
+import {Text, View, Image, ScrollView, TouchableOpacity} from 'react-native';
 import Theme from '../Theme';
-import { SettingLink } from '../components/SettingLink';
-import { Field, Password } from '../components/Inputs';
-import { Button } from '../components/Button';
-import { SmallLabel } from '../components/SmallLabel';
+import {SettingLink} from '../components/SettingLink';
+import {Field, Password} from '../components/Inputs';
+import {Button} from '../components/Button';
+import {SmallLabel} from '../components/SmallLabel';
 
-import { Picker } from '@react-native-picker/picker';
+import {Picker} from '@react-native-picker/picker';
 
 const colors = Theme.colors;
 const size = Theme.size;
 const title1 = Theme.title1;
 const text = Theme.text;
 
-const Address = ({ navigation }) => {
+const Address = ({navigation}) => {
   const [name, setName] = useState('');
 
   return (
@@ -29,8 +29,9 @@ const Address = ({ navigation }) => {
           navigation.pop();
         }}>
         <Image
-          style={{ marginTop: 9, width: 18, height: 18 }}
-          source={require('../assets/pics/backarrow.png')} />
+          style={{marginTop: 9, width: 18, height: 18}}
+          source={require('../assets/pics/backarrow.png')}
+        />
       </TouchableOpacity>
       <Text
         style={{
@@ -54,14 +55,14 @@ const Address = ({ navigation }) => {
       <SettingLink
         textHeading={'PAKISTAN'}
         onPress={() => {
-          navigation.push('EditAddress');
+          navigation.navigate('EditAddress');
         }}
       />
     </View>
   );
 };
 
-export const EditAddress = ({ navigation }) => {
+export const EditAddress = ({navigation}) => {
   const [selectedValue, setSelectedValue] = useState('');
 
   return (
@@ -72,9 +73,9 @@ export const EditAddress = ({ navigation }) => {
         paddingHorizontal: 35,
         flex: 1,
       }}>
-      <TouchableOpacity activeOpacity={0.7} onPress={() => navigation.navigate()}>
+      <TouchableOpacity activeOpacity={0.7} onPress={() => navigation.goBack()}>
         <Image
-          style={{ marginTop: 9, width: 18, height: 18 }}
+          style={{marginTop: 9, width: 18, height: 18}}
           source={require('../assets/pics/backarrow.png')}></Image>
       </TouchableOpacity>
       <Text
@@ -88,10 +89,8 @@ export const EditAddress = ({ navigation }) => {
         EDIT ADDRESS
       </Text>
 
-      <SmallLabel LabelHeading={'Name'} />
       <Field placeholder={'NAME'} marginBottom={12} />
 
-      <SmallLabel LabelHeading={'LAST NAME'} />
       <Field placeholder={'LAST NAME'} marginBottom={12} />
 
       <View
@@ -104,10 +103,10 @@ export const EditAddress = ({ navigation }) => {
         }}>
         <Picker
           selectedValue={selectedValue}
-          style={{ color: '#646261', fontSize: size.body }}
+          style={{color: '#646261', fontSize: size.body}}
           onValueChange={(itemValue, itemIndex) => setSelectedValue(itemValue)}
           prompt="CHOOSE YOUR COUNTRY"
-          itemStyle={{ color: 'red' }}>
+          itemStyle={{color: 'red'}}>
           <Picker.Item label="PAKISTAN" value="PAKISTAN" />
           <Picker.Item label="DUBAI" value="DUBAI" />
           <Picker.Item label="SAUDIA" value="SAUDIA" />
@@ -115,23 +114,19 @@ export const EditAddress = ({ navigation }) => {
         </Picker>
       </View>
 
-      <SmallLabel LabelHeading={'CITY'} />
       <Field placeholder={'CITY'} marginBottom={12} />
 
-      <SmallLabel LabelHeading={'ADDRESS'} />
       <Field placeholder={'ADDRESS'} marginBottom={12} />
 
-      <SmallLabel LabelHeading={'POST CODE'} />
       <Field placeholder={'POST CODE'} marginBottom={12} />
 
-      <SmallLabel LabelHeading={'PHONE NUMBER'} />
       <Field placeholder={'PHONE NUMBER'} marginBottom={40} />
 
       <Button
         text={'SAVE ADDRESS'}
         height={53}
         onPress={() => {
-          navigation.popToTop();
+          navigation.goBack();
         }}
       />
     </ScrollView>

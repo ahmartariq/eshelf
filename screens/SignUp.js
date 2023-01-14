@@ -143,7 +143,11 @@ const SignUp = ({navigation}) => {
             marginBottom: '5%',
           }}>
           <Text style={{color: colors.text}}>Already have an account? </Text>
-          <TouchableOpacity activeOpacity={0.7}>
+          <TouchableOpacity
+            activeOpacity={0.7}
+            onPress={() => {
+              navigation.navigate('Login');
+            }}>
             <Text
               style={{color: colors.tertiary, textDecorationLine: 'underline'}}>
               Login
