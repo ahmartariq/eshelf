@@ -7,7 +7,6 @@ import {SvgXml} from 'react-native-svg';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {signInWithEmailAndPassword} from 'firebase/auth';
 import {auth, db} from '../FirebaseConfig';
-import {get} from 'react-native/Libraries/Utilities/PixelRatio';
 import {async} from '@firebase/util';
 
 import {NavigationContainer} from '@react-navigation/native';
@@ -35,22 +34,25 @@ const Login = ({navigation}) => {
   const [err, setErr] = useState('');
 
   const handleLogin = () => {
-    setErr('');
-    if (email === '') setErr('Email Field is empty');
-    else if (password === '') setErr('Password Field is empty');
-    else {
-      signInWithEmailAndPassword(auth, email, password)
-        .then(userCredential => {
-          storeAsync(userCredential.user.uid);
-          console.log('logged in');
-          // setEmail('')
-          // setPassword('')
-          // navigation.navigate('Home', {userId: userCredential.user});
-        })
-        .catch(error => {
-          setErr('Invalid Credentials!');
-        });
-    }
+    // setErr('');
+    // if (email === '') setErr('Email Field is empty');
+    // else if (password === '') setErr('Password Field is empty');
+    // else {
+    //   signInWithEmailAndPassword(auth, email, password)
+    //     .then(userCredential => {
+    //       storeAsync(userCredential.user.uid);
+    //       console.log('logged in');
+    //       // setEmail('')
+    //       // setPassword('')
+    //       // navigation.navigate('Home', {userId: userCredential.user});
+    //     })
+    //     .catch(error => {
+    //       setErr('Invalid Credentials!');
+    //     });
+    // }
+
+    navigation.navigate("Tabs")
+
   };
 
   const storeAsync = async user => {

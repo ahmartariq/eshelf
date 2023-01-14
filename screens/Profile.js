@@ -1,18 +1,11 @@
 import React, {useEffect, useState} from 'react';
-import {
-  View,
-  Text,
-  ScrollView,
-  TouchableOpacity,
-  Switch,
-  Alert,
-} from 'react-native';
+import {View,Text,ScrollView,TouchableOpacity,Switch,Alert,} from 'react-native';
 import {SvgXml} from 'react-native-svg';
 import {SettingLink} from '../components/SettingLink';
 import {BorderedButton} from '../components/Button';
 import Theme from '../Theme';
 import AsyncStorage, { useAsyncStorage } from '@react-native-async-storage/async-storage';
-import {getDatabase, ref, onValue, child, get} from 'firebase/database';
+import {getDatabase, ref,child, get} from 'firebase/database';
 import {signOut} from '@firebase/auth';
 import {auth} from '../FirebaseConfig';
 
@@ -43,23 +36,23 @@ const Profile = ({navigation}) => {
     }
   };
 
-  useEffect(() => {
-    asyncData();
+  // useEffect(() => {
+  //   asyncData();
 
-    const dbRef = ref(getDatabase());
-    get(child(dbRef, `users/${data}`))
-      .then(snapshot => {
-        if (snapshot.exists()) {
-          setName(snapshot.val().name);
-          setEmail(snapshot.val().email);
-        } else {
-          console.log('No data available');
-        }
-      })
-      .catch(error => {
-        console.error(error);
-      });
-  }, [name, email]);
+  //   const dbRef = ref(getDatabase());
+  //   get(child(dbRef, `users/${data}`))
+  //     .then(snapshot => {
+  //       if (snapshot.exists()) {
+  //         setName(snapshot.val().name);
+  //         setEmail(snapshot.val().email);
+  //       } else {
+  //         console.log('No data available');
+  //       }
+  //     })
+  //     .catch(error => {
+  //       console.error(error);
+  //     });
+  // }, [name, email]);
 
   const BlockView = () => {
     if (active === 0) {
@@ -69,7 +62,6 @@ const Profile = ({navigation}) => {
     }
   };
 
-  // console.log(active);
 
   return (
     <ScrollView style={{backgroundColor: colors.background, height: '100%', flex: 1 , paddingBottom: 100}}>
@@ -181,33 +173,33 @@ const UserSetting = () => {
   };
 
   const logoutAlert = () => {
-    Alert.alert(
-      'Log Out',
-      'Are you sure?',
-      [
-        {
-          text: 'Log Out',
-          onPress: () => {
-            Alert.alert('Logged Out.');
-            signOut(auth)
-              .then(() => {
-                const value = AsyncStorage.removeItem('userId')
-              })
-              .catch(err => {
-                console.log(err);
-              });
-          },
-          style: 'Cancel',
-        },
-        {
-          text: 'Cancel',
-          style: 'Cancel',
-        },
-      ],
-      {
-        cancelable: true,
-      },
-    );
+    // Alert.alert(
+    //   'Log Out',
+    //   'Are you sure?',
+    //   [
+    //     {
+    //       text: 'Log Out',
+    //       onPress: () => {
+    //         Alert.alert('Logged Out.');
+    //         signOut(auth)
+    //           .then(() => {
+    //             const value = AsyncStorage.removeItem('userId')
+    //           })
+    //           .catch(err => {
+    //             console.log(err);
+    //           });
+    //       },
+    //       style: 'Cancel',
+    //     },
+    //     {
+    //       text: 'Cancel',
+    //       style: 'Cancel',
+    //     },
+    //   ],
+    //   {
+    //     cancelable: true,
+    //   },
+    // );
   };
 
   return (

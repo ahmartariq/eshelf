@@ -1,13 +1,4 @@
 import React from 'react';
-import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  useColorScheme,
-  View,
-} from 'react-native';
 import Login from '../screens/Login';
 import SignUp from '../screens/SignUp';
 import ForgotPassword, {OTP, ResetPassword} from '../screens/ForgotPassowrd';

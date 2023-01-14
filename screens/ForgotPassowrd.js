@@ -1,19 +1,8 @@
 import {useState, useCallback} from 'react';
-import {
-  Text,
-  TextInput,
-  View,
-  Image,
-  TouchableOpacity,
-  ScrollView,
-} from 'react-native';
+import {Text,View,Image,TouchableOpacity} from 'react-native';
 import Theme from '../Theme';
 import {Button} from '../components/Button';
 import {Field, Password} from '../components/Inputs';
-
-const Facebook = '../assets/pics/facebook.png';
-const Instagram = '../assets/pics/instagram.png';
-const Twitter = '../assets/pics/twitter.png';
 
 const colors = Theme.colors;
 const size = Theme.size;

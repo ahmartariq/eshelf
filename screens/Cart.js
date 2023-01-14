@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import { View, Text, ScrollView, Image, TouchableOpacity } from 'react-native'
 import { SvgXml } from 'react-native-svg';
-import CartProductCard from '../components/CartProductCard';
 import Theme from '../Theme'
 import { Button } from '../components/Button';
 
@@ -49,8 +48,8 @@ const Cart = () => {
 
         <View style={{ marginBottom: 20 }}>
           {
-            product.map(p => (
-              <View style={{ marginTop: '5%', width: '100%' }}>
+            product.map((p , key) => (
+              <View key={key} style={{ marginTop: '5%', width: '100%' }}>
                 <Text style={{ fontSize: size.headline, color: colors.gray, fontFamily: Theme.fonts.medium, fontSize: 12 }}>{p.name}</Text>
                 <View style={{ flexDirection: 'row', width: '100%', marginTop:'2%' }}>
 
