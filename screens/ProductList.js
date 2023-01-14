@@ -6,6 +6,7 @@ import {
   ScrollView,
   TouchableOpacity,
   Flatass} from 'react-native';
+
 import Theme from '../Theme';
 import {SvgXml} from 'react-native-svg';
 import {BorderedButton} from '../components/Button';
@@ -151,3 +152,4 @@ const ProductList = () => {
 }
 
 export default ProductList
+

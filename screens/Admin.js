@@ -15,7 +15,6 @@ import { SettingLink } from '../components/SettingLink';
 import { SvgXml } from 'react-native-svg';
 import { getDatabase, ref, onValue, remove } from "firebase/database"
 import { auth, db } from '../FirebaseConfig';
-
 const colors = Theme.colors;
 const size = Theme.size;
 const title1 = Theme.title1;
@@ -153,7 +152,6 @@ export default function AdminProfile() {
 }
 
 export const Users = () => {
-
   const [data, setData] = useState([])
   const deleteSVG = `<svg width="20" height="23" viewBox="0 0 20 23" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path d="M1 5.25879H3H19" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -238,7 +236,6 @@ export const Users = () => {
       </View>
         ))
       }
-      
     </ScrollView>
   );
 };
@@ -347,7 +344,6 @@ export const UsersProducts = () => {
         item,
       })),
     );
-
     setSelect(product.map(e => e));
   }, []);
 
@@ -618,6 +614,7 @@ export const AddProduct = () => {
   <path d="M8 15L1 8L8 1" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
   </svg>`;
 
+
   const borderOutline = `<svg width="350" height="243" viewBox="0 0 374 243" fill="none" xmlns="http://www.w3.org/2000/svg">
   <rect x="1.5" y="1.5" width="371" height="240" rx="14.5" stroke="#D79E84" stroke-width="3" stroke-dasharray="6 6"/>
   <path d="M207 128.667V137.556C207 138.735 206.532 139.865 205.698 140.699C204.865 141.532 203.734 142 202.556 142H171.444C170.266 142 169.135 141.532 168.302 140.699C167.468 139.865 167 138.735 167 137.556V128.667" stroke="#D79E84" stroke-width="4.44444" stroke-linecap="round" stroke-linejoin="round"/>
@@ -637,6 +634,7 @@ export const AddProduct = () => {
         // marginBottom: 300,
       }}
       contentContainerStyle={{ justifyContent: 'space-evenly' }}>
+
       <View
         style={{
           flexDirection: 'row',
@@ -732,6 +730,7 @@ export const AddProduct = () => {
           SIZE AVAILABLE
         </Text>
         <View style={{ flexDirection: 'row', marginTop: '2%' }}>
+
           {productSize.map((s, index) => (
             <TouchableOpacity
               key={index}
