@@ -5,15 +5,16 @@ import {
   Image,
   ScrollView,
   TouchableOpacity,
+  Alert,
 } from 'react-native';
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import Theme from '../Theme';
-import {Field, Password} from '../components/Inputs';
-import {Button, BorderedButton} from '../components/Button';
-import {SettingLink} from '../components/SettingLink';
-import {SvgXml} from 'react-native-svg';
-import UsersField from '../components/UsersField';
-
+import { Field, Password } from '../components/Inputs';
+import { Button, BorderedButton } from '../components/Button';
+import { SettingLink } from '../components/SettingLink';
+import { SvgXml } from 'react-native-svg';
+import { getDatabase, ref, onValue, remove } from "firebase/database"
+import { auth, db } from '../FirebaseConfig';
 const colors = Theme.colors;
 const size = Theme.size;
 const title1 = Theme.title1;
@@ -107,7 +108,7 @@ const product = [
 
 export default function AdminProfile() {
   return (
-    <View style={{backgroundColor: colors.background, height: '100%', flex: 1}}>
+    <View style={{ backgroundColor: colors.background, height: '100%', flex: 1 }}>
       <SvgXml xml={shapeSVG} />
       <Text
         style={{
@@ -128,7 +129,7 @@ export default function AdminProfile() {
           paddingHorizontal: 35,
           flex: 1,
         }}>
-        <Text style={{alignSelf: 'center', fontSize: size.headline}}>
+        <Text style={{ fontSize: size.headline, color: colors.text, alignSelf: 'center' }}>
           ADMIN PROFILE
         </Text>
         <Text
@@ -140,7 +141,7 @@ export default function AdminProfile() {
           }}>
           AHMAR TARIQ
         </Text>
-        <Text style={{color: colors.gray, marginBottom: 36}}>
+        <Text style={{ color: colors.gray, marginBottom: 36 }}>
           AHMARPRESIDENT@HOTMAIL.COM{' '}
         </Text>
         <SettingLink textHeading={'ACCOUNT'} />
@@ -151,9 +152,62 @@ export default function AdminProfile() {
 }
 
 export const Users = () => {
+  const [data, setData] = useState([])
+  const deleteSVG = `<svg width="20" height="23" viewBox="0 0 20 23" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M1 5.25879H3H19" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M17 5.25865V19.2137C17 19.7425 16.7893 20.2495 16.4142 20.6234C16.0391 20.9973 15.5304 21.2073 15 21.2073H5C4.46957 21.2073 3.96086 20.9973 3.58579 20.6234C3.21071 20.2495 3 19.7425 3 19.2137V5.25865M6 5.25865V3.26507C6 2.73634 6.21071 2.22926 6.58579 1.85539C6.96086 1.48152 7.46957 1.27148 8 1.27148H12C12.5304 1.27148 13.0391 1.48152 13.4142 1.85539C13.7893 2.22926 14 2.73634 14 3.26507V5.25865" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M8 10.2422V16.2229" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M12 10.2422V16.2229" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>`
+
+
+    useEffect(() => {
+      const dbRef = ref(db, 'users/');
+      onValue(dbRef, (snapshot) => {
+        let users =[];
+        snapshot.forEach((childSnapshot) => {
+          const childKey = childSnapshot.key;
+          const childData = childSnapshot.val();
+          users.push({"key" : childKey ,  "user" : childData})
+        });
+        setData(users);
+      });
+    }, [])
+
+
+    const deleteUser = e => {
+        
+      Alert.alert(
+        "Delete User",
+        "Are you sure?",
+        [
+          {
+            text : "Cancel",
+            style: "Cancel"
+          },
+          {
+            text: "Delete",
+            onPress: () => {
+              Alert.alert("User Deleted")
+              const dbRef2 = ref(db, 'users/'+e)
+              remove(dbRef2)
+              .catch( err => console.log(err))
+            }
+          },
+         
+        ],
+        {
+          cancelable: true
+        }
+      )
+    }
+    
+
+
+  console.log(data);
   return (
     <ScrollView
-      style={{backgroundColor: colors.background, height: '100%', flex: 1}}>
+      style={{ backgroundColor: colors.background, height: '100%', flex: 1 }}>
       <View>
         <Text
           style={{
@@ -169,41 +223,19 @@ export const Users = () => {
           ESHELF
         </Text>
       </View>
-      <View style={{marginBottom: '-5%'}}>
-        <UsersField
-          Name="AHMAR TARIQ"
-          Email="AHMARPRESIDENT@HOTMAIL.COM"
-          PhoneNumber="03125077808"
-        />
+      {
+        data.map(d => (
+          <View style={{ backgroundColor: '#EEEEEE', margin: 20, borderRadius: 20, flexDirection: 'row', justifyContent: 'space-between', paddingVertical: 20, paddingHorizontal: 15 }} >
+        <View >
+          <Text style={{ fontSize: size.headline, color: colors.background, fontWeight: 'bold' }}>{d.user.name}</Text>
+          <Text style={{ color: colors.background }}>{d.user.email}</Text>
+        </View>
+        <TouchableOpacity key={d.key} onPress={e => deleteUser(d.key)} style={{ justifyContent: 'center', alignItems: 'center' }}>
+          <SvgXml xml={deleteSVG}  />
+        </TouchableOpacity>
       </View>
-      <View style={{marginBottom: '-5%'}}>
-        <UsersField
-          Name="SHAHZAIB KHURSHEED"
-          Email="shahzaib@yahoo.com"
-          PhoneNumber="03125077808"
-        />
-      </View>
-      <View style={{marginBottom: '-5%'}}>
-        <UsersField
-          Name="SOBAN FAYYAZ"
-          Email="jaanjee@hotlook.com"
-          PhoneNumber="03125077808"
-        />
-      </View>
-      <View style={{marginBottom: '-5%'}}>
-        <UsersField
-          Name="SHEHRYAR KHAN"
-          Email="shehryar@yahoo.com"
-          PhoneNumber="03125077808"
-        />
-      </View>
-      <View style={{marginBottom: '-5%'}}>
-        <UsersField
-          Name="AHMAR TARIQ"
-          Email="AHMARPRESIDENT@HOTMAIL.COM"
-          PhoneNumber="03125077808"
-        />
-      </View>
+        ))
+      }
     </ScrollView>
   );
 };
@@ -226,8 +258,8 @@ export const Dashboard = () => {
           ESHELF
         </Text>
       </View>
-      <View style={{flexDirection: 'column', justifyContent: 'space-between'}}>
-        <View style={{flexDirection: 'row', justifyContent: 'space-evenly'}}>
+      <View style={{ flexDirection: 'column', justifyContent: 'space-between' }}>
+        <View style={{ flexDirection: 'row', justifyContent: 'space-evenly' }}>
           <View
             style={{
               backgroundColor: 'red',
@@ -261,7 +293,7 @@ export const Dashboard = () => {
             <SvgXml xml={ordersSVG} />
           </View>
         </View>
-        <View style={{flexDirection: 'row', justifyContent: 'space-evenly'}}>
+        <View style={{ flexDirection: 'row', justifyContent: 'space-evenly' }}>
           <View
             style={{
               backgroundColor: 'yellow',
@@ -312,7 +344,6 @@ export const UsersProducts = () => {
         item,
       })),
     );
-
     setSelect(product.map(e => e));
   }, []);
 
@@ -341,10 +372,10 @@ export const UsersProducts = () => {
               key={key}
               style={
                 key % 4 === 0 && key !== 0
-                  ? {width: '100%', marginVertical: 9.5}
-                  : {width: '44%', margin: 9.5, overflow: 'hidden'}
+                  ? { width: '100%', marginVertical: 9.5 }
+                  : { width: '44%', margin: 9.5, overflow: 'hidden' }
               }>
-              <View style={{width: '100%', position: 'relative'}}>
+              <View style={{ width: '100%', position: 'relative' }}>
                 <TouchableOpacity activeOpacity={0.7}>
                   <SvgXml
                     xml={cancelSvg}
@@ -360,8 +391,8 @@ export const UsersProducts = () => {
                   source={sel.image}
                   style={
                     key % 4 === 0 && key !== 0
-                      ? {width: '100%', zIndex: -1}
-                      : {width: '100%', height: 200, zIndex: -1}
+                      ? { width: '100%', zIndex: -1 }
+                      : { width: '100%', height: 200, zIndex: -1 }
                   }
                 />
               </View>
@@ -393,7 +424,7 @@ export const UsersProducts = () => {
               alignItems: 'center',
               justifyContent: 'center',
             }}>
-            <SvgXml xml={hanger} style={{marginBottom: 12}} />
+            <SvgXml xml={hanger} style={{ marginBottom: 12 }} />
             <Text
               style={{
                 fontFamily: 'GT-America-Medium',
@@ -518,15 +549,15 @@ export const EditProduct = () => {
               key={key}
               style={
                 key % 4 === 0 && key !== 0
-                  ? {width: '100%', marginVertical: 9.5}
-                  : {width: '44%', margin: 9.5, overflow: 'hidden'}
+                  ? { width: '100%', marginVertical: 9.5 }
+                  : { width: '44%', margin: 9.5, overflow: 'hidden' }
               }>
               <Image
                 source={sel.image}
                 style={
                   key % 4 === 0 && key !== 0
-                    ? {width: '100%'}
-                    : {width: '100%', height: 200}
+                    ? { width: '100%' }
+                    : { width: '100%', height: 200 }
                 }
               />
               <Text
@@ -557,7 +588,7 @@ export const EditProduct = () => {
               alignItems: 'center',
               justifyContent: 'center',
             }}>
-            <SvgXml xml={hanger} style={{marginBottom: 12}} />
+            <SvgXml xml={hanger} style={{ marginBottom: 12 }} />
             <Text
               style={{
                 fontFamily: 'GT-America-Medium',
@@ -583,6 +614,7 @@ export const AddProduct = () => {
   <path d="M8 15L1 8L8 1" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
   </svg>`;
 
+
   const borderOutline = `<svg width="350" height="243" viewBox="0 0 374 243" fill="none" xmlns="http://www.w3.org/2000/svg">
   <rect x="1.5" y="1.5" width="371" height="240" rx="14.5" stroke="#D79E84" stroke-width="3" stroke-dasharray="6 6"/>
   <path d="M207 128.667V137.556C207 138.735 206.532 139.865 205.698 140.699C204.865 141.532 203.734 142 202.556 142H171.444C170.266 142 169.135 141.532 168.302 140.699C167.468 139.865 167 138.735 167 137.556V128.667" stroke="#D79E84" stroke-width="4.44444" stroke-linecap="round" stroke-linejoin="round"/>
@@ -601,7 +633,8 @@ export const AddProduct = () => {
         height: '100%',
         // marginBottom: 300,
       }}
-      contentContainerStyle={{justifyContent: 'space-evenly'}}>
+      contentContainerStyle={{ justifyContent: 'space-evenly' }}>
+
       <View
         style={{
           flexDirection: 'row',
@@ -611,7 +644,7 @@ export const AddProduct = () => {
         <SvgXml xml={backArrow} />
         <Text style={Theme.title1}> Add Product</Text>
       </View>
-      <View style={{width: '60%'}}>
+      <View style={{ width: '60%' }}>
         <Text
           style={{
             color: colors.primary,
@@ -696,7 +729,8 @@ export const AddProduct = () => {
           }}>
           SIZE AVAILABLE
         </Text>
-        <View style={{flexDirection: 'row', marginTop: '2%'}}>
+        <View style={{ flexDirection: 'row', marginTop: '2%' }}>
+
           {productSize.map((s, index) => (
             <TouchableOpacity
               key={index}
@@ -704,42 +738,42 @@ export const AddProduct = () => {
               style={
                 size === index
                   ? {
-                      padding: 2,
-                      width: 35,
-                      height: 35,
-                      borderRadius: 5,
-                      backgroundColor: colors.primary,
-                      borderColor: colors.primary,
-                      borderWidth: 1.24,
-                      justifyContent: 'center',
-                      alignItems: 'center',
-                      marginRight: 10,
-                    }
+                    padding: 2,
+                    width: 35,
+                    height: 35,
+                    borderRadius: 5,
+                    backgroundColor: colors.primary,
+                    borderColor: colors.primary,
+                    borderWidth: 1.24,
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    marginRight: 10,
+                  }
                   : {
-                      padding: 2,
-                      width: 35,
-                      height: 35,
-                      borderRadius: 5,
-                      borderColor: colors.primary,
-                      borderWidth: 1.24,
-                      justifyContent: 'center',
-                      alignItems: 'center',
-                      marginRight: 10,
-                    }
+                    padding: 2,
+                    width: 35,
+                    height: 35,
+                    borderRadius: 5,
+                    borderColor: colors.primary,
+                    borderWidth: 1.24,
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    marginRight: 10,
+                  }
               }>
               <Text
                 style={
                   size === index
                     ? {
-                        color: colors.background,
-                        fontSize: 21,
-                        fontFamily: Theme.fonts.regular,
-                      }
+                      color: colors.background,
+                      fontSize: 21,
+                      fontFamily: Theme.fonts.regular,
+                    }
                     : {
-                        color: colors.primary,
-                        fontSize: 21,
-                        fontFamily: Theme.fonts.regular,
-                      }
+                      color: colors.primary,
+                      fontSize: 21,
+                      fontFamily: Theme.fonts.regular,
+                    }
                 }>
                 {s}
               </Text>
@@ -747,7 +781,7 @@ export const AddProduct = () => {
           ))}
         </View>
       </View>
-      <View style={{marginBottom: '5% '}}>
+      <View style={{ marginBottom: '5% ' }}>
         <Button text={'ADD PRDDUCT'} height={100} marginTop={'5%'} />
       </View>
     </ScrollView>

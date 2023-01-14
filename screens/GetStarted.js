@@ -10,8 +10,7 @@ const size = Theme.size;
 const title1 = Theme.title1;
 const text = Theme.text;
 
-const GetStarted = () => {
-
+const GetStarted = ({navigation}) => {
 
     const getStartedIcon = `<svg width="500" height="570" viewBox="0 0 427 623" fill="none" xmlns="http://www.w3.org/2000/svg">
     <g style="mix-blend-mode:hard-light" filter="url(#filter0_f_479_34)">
@@ -82,43 +81,22 @@ const GetStarted = () => {
     </svg>
     `
 
-    const [showGetStarted, setShowGetStarted] = useState(false);
-
-    useEffect(() => {
-      async function checkFirstTime() {
-        try {
-          const value = await AsyncStorage.getItem('first_time');
-          if (value === null) {
-            setShowGetStarted(true);
-            await AsyncStorage.setItem('first_time', 'false');
-          }
-        } catch (error) {
-          console.log(error);
-        }
-      }
-  
-      checkFirstTime();
-    }, []);
-    
-    if (!showGetStarted) {
-      return null;
-    }
 
 
   return (
-    <View style={{backgroundColor:colors.background, height:"100%"}}>
-      <SvgXml xml={getStartedIcon}  /> 
+    <View style={{backgroundColor:colors.background, flex: 1}}>
+      <SvgXml xml={getStartedIcon} width="100%" height="70%"  /> 
       <View style={{position:"absolute"}}>
-        <Image source={require("../assets/pics/startedman.png")}   />
+        <Image source={require("../assets/pics/startedman.png")} style={{}}   />
       </View>
-      <View style={{marginHorizontal: 25 , flex: 1, marginTop:-36}}>
+      <View style={{marginHorizontal: 25 , flex: 1}}>
         <Text style={{ width:"60%", fontFamily:"GT-America-Medium", color:colors.heading, fontSize:33, marginBottom:"2%"}}>Start Journey With 
           <Text style={{fontFamily: 'Bilagike', fontSize : 47, color : colors.primary}}> 
           ESHELF
         </Text> 
         </Text>
         <Text style={{width:"60%", fontFamily: "GT-America-Medium", color:colors.heading, marginBottom:"4%"}}>Smart, Gorgous & faionable Collection</Text>
-        <Button height={"25%"} text={"Get Started"} onPress={() => setShowGetStarted(false)}  />
+        <Button height={"25%"} text={"Get Started"} onPress={() => navigation.navigate('Login')}  />
       </View>
 
     </View>

@@ -1,19 +1,19 @@
-import {Component, useState} from 'react';
-import {Text, View, Image, ScrollView} from 'react-native';
+import { Component, useState } from 'react';
+import { Text, View, Image, ScrollView, TouchableOpacity } from 'react-native';
 import Theme from '../Theme';
-import {SettingLink} from '../components/SettingLink';
-import {Field, Password} from '../components/Inputs';
-import {Button} from '../components/Button';
-import {SmallLabel} from '../components/SmallLabel';
+import { SettingLink } from '../components/SettingLink';
+import { Field, Password } from '../components/Inputs';
+import { Button } from '../components/Button';
+import { SmallLabel } from '../components/SmallLabel';
 
-import {Picker} from '@react-native-picker/picker';
+import { Picker } from '@react-native-picker/picker';
 
 const colors = Theme.colors;
 const size = Theme.size;
 const title1 = Theme.title1;
 const text = Theme.text;
 
-const Address = ({navigation}) => {
+const Address = ({ navigation }) => {
   const [name, setName] = useState('');
 
   return (
@@ -24,9 +24,14 @@ const Address = ({navigation}) => {
         paddingHorizontal: 35,
         flex: 1,
       }}>
-      <Image
-        style={{marginTop: 9, width: 18, height: 18}}
-        source={require('../assets/pics/backarrow.png')}></Image>
+      <TouchableOpacity
+        onPress={() => {
+          navigation.pop();
+        }}>
+        <Image
+          style={{ marginTop: 9, width: 18, height: 18 }}
+          source={require('../assets/pics/backarrow.png')} />
+      </TouchableOpacity>
       <Text
         style={{
           marginBottom: 80,
@@ -56,7 +61,7 @@ const Address = ({navigation}) => {
   );
 };
 
-export const EditAddress = ({navigation}) => {
+export const EditAddress = ({ navigation }) => {
   const [selectedValue, setSelectedValue] = useState('');
 
   return (
@@ -67,9 +72,11 @@ export const EditAddress = ({navigation}) => {
         paddingHorizontal: 35,
         flex: 1,
       }}>
-      <Image
-        style={{marginTop: 9, width: 18, height: 18}}
-        source={require('../assets/pics/backarrow.png')}></Image>
+      <TouchableOpacity activeOpacity={0.7} onPress={() => navigation.navigate()}>
+        <Image
+          style={{ marginTop: 9, width: 18, height: 18 }}
+          source={require('../assets/pics/backarrow.png')}></Image>
+      </TouchableOpacity>
       <Text
         style={{
           marginBottom: 29,
@@ -97,10 +104,10 @@ export const EditAddress = ({navigation}) => {
         }}>
         <Picker
           selectedValue={selectedValue}
-          style={{color: '#646261', fontSize: size.body}}
+          style={{ color: '#646261', fontSize: size.body }}
           onValueChange={(itemValue, itemIndex) => setSelectedValue(itemValue)}
           prompt="CHOOSE YOUR COUNTRY"
-          itemStyle={{color: 'red'}}>
+          itemStyle={{ color: 'red' }}>
           <Picker.Item label="PAKISTAN" value="PAKISTAN" />
           <Picker.Item label="DUBAI" value="DUBAI" />
           <Picker.Item label="SAUDIA" value="SAUDIA" />

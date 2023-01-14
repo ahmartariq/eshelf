@@ -31,7 +31,6 @@ const SignUp = ({navigation}) => {
   const [err, setErr] = useState('');
 
   const handleSignUp = ({navigation}) => {
-    console.log('pressed');
     setErr('');
     if (name === '') setErr('Name Field is empty');
     else if (email === '') setErr('Email Field is empty');
@@ -54,14 +53,15 @@ const SignUp = ({navigation}) => {
           setRePassword('');
         })
         .catch(error => {
-          if (
-            (error =
-              'Password should be at least 6 characters (auth/weak-password)')
-          )
-            setErr('Password should be at least 6 characters');
-          else {
-            setErr('Email address already in use');
-          }
+          // if (
+          //   (error =
+          //     'Password should be at least 6 characters (auth/weak-password)')
+          // )
+          //   setErr('Password should be at least 6 characters');
+          // else {
+          //   setErr('Email address already in use');
+          // }
+          console.log(error);
         });
     }
   };

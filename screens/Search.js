@@ -25,6 +25,8 @@ const Search = () => {
         paddingTop: '6%',
         paddingHorizontal: 34,
         flex: 1,
+        height: '100%',
+        position : 'relative'
       }}>
       <Text style={Theme.eshlefWhite}>ESHELF</Text>
       <View

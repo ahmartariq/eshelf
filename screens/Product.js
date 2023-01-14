@@ -77,7 +77,7 @@ const Product = () => {
         <View style={{ marginTop: 15, flexDirection: 'row' }}>
           {
             productSize.map((s, index) => (
-              <TouchableOpacity key={index} onPress={e => setSize(index)} style={size === index ? { padding: 2, width: 35, height: 35, borderRadius: 5, backgroundColor: colors.primary, borderColor: colors.primary, borderWidth: 1.24, justifyContent: 'center', alignItems: 'center', marginRight: 10 } : { padding: 2, width: 35, height: 35, borderRadius: 5, borderColor: colors.primary, borderWidth: 1.24, justifyContent: 'center', alignItems: 'center', marginRight: 10 }}>
+              <TouchableOpacity key={index} onPress={() => setSize(index)} style={size === index ? { padding: 2, width: 35, height: 35, borderRadius: 5, backgroundColor: colors.primary, borderColor: colors.primary, borderWidth: 1.24, justifyContent: 'center', alignItems: 'center', marginRight: 10 } : { padding: 2, width: 35, height: 35, borderRadius: 5, borderColor: colors.primary, borderWidth: 1.24, justifyContent: 'center', alignItems: 'center', marginRight: 10 }}>
                 <Text style={size === index ? { color: colors.background, fontSize: 21, fontFamily: fonts.regular } : { color: colors.primary, fontSize: 21, fontFamily: fonts.regular }}>{s}</Text>
               </TouchableOpacity>
             ))

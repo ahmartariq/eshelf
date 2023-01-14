@@ -1,15 +1,17 @@
-import React, {useState} from 'react';
-import {Text, View} from 'react-native';
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import React, { useState } from 'react';
+import { Text, View } from 'react-native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+
 import Home from '../screens/Home';
 import Search from '../screens/Search';
 import Cart from '../screens/Cart';
+import ProductList from '../screens/ProductList';
 import Profile from '../screens/Profile';
 import Menu from '../screens/Menu';
-import {SvgXml} from 'react-native-svg';
+import { SvgXml } from 'react-native-svg';
 import Theme from '../Theme';
 import ProfileNavigation from './ProfileNavigation';
-import {NavigationContainer} from '@react-navigation/native';
+import { NavigationContainer } from '@react-navigation/native';
 
 const Tab = createBottomTabNavigator();
 
@@ -18,7 +20,7 @@ const colors = Theme.colors;
 const Tabs = () => {
   const [color, setColor] = useState(colors.text);
 
-  const menuIcon = ({focused, color, size}) => (
+  const menuIcon = ({ focused, color, size }) => (
     <SvgXml
       xml={
         focused
@@ -48,7 +50,7 @@ fill="${colors.text}" stroke="${colors.text}"/>
     />
   );
 
-  const searchIcon = ({focused, color, size}) => (
+  const searchIcon = ({ focused, color, size }) => (
     <SvgXml
       xml={
         focused
@@ -66,7 +68,7 @@ stroke=${colors.text} stroke-width="3" stroke-linecap="round" stroke-linejoin="r
     />
   );
 
-  const homeIcon = ({focused, color, size}) => (
+  const homeIcon = ({ focused, color, size }) => (
     <SvgXml
       xml={
         focused
@@ -82,7 +84,7 @@ fill= ${colors.text}/>
     />
   );
 
-  const profileIcon = ({focused, color, size}) => (
+  const profileIcon = ({ focused, color, size }) => (
     <SvgXml
       xml={
         focused
@@ -102,7 +104,7 @@ stroke= ${colors.text} stroke-width="3" stroke-linecap="round" stroke-linejoin="
     />
   );
 
-  const cartIcon = ({focused, color, size}) => (
+  const cartIcon = ({ focused, color, size }) => (
     <SvgXml
       xml={
         focused
@@ -125,8 +127,11 @@ stroke= ${colors.text} stroke-width="3" stroke-linecap="round" stroke-linejoin="
     />
   );
 
+
+
+
   return (
-    <NavigationContainer>
+    // <NavigationContainer>
       <Tab.Navigator
         screenOptions={{
           tabBarStyle: {
@@ -152,24 +157,21 @@ stroke= ${colors.text} stroke-width="3" stroke-linecap="round" stroke-linejoin="
           component={Search}
           options={{
             tabBarIcon: searchIcon,
+            tabBarHideOnKeyboard: true
           }}
         />
         <Tab.Screen
           name="Menu"
-          component={Menu}
+          component={ProductList}
           options={{
             tabBarIcon: menuIcon,
           }}
         />
         <Tab.Screen
           name="Profile"
-          component={ProfileNavigation}
+          component={Profile}
           options={{
             tabBarIcon: profileIcon,
-            tabBarStyle:{
-                display:"none"
-
-            }
           }}
         />
         <Tab.Screen
@@ -180,7 +182,7 @@ stroke= ${colors.text} stroke-width="3" stroke-linecap="round" stroke-linejoin="
           }}
         />
       </Tab.Navigator>
-    </NavigationContainer>
+    // </NavigationContainer>
   );
 };
 

@@ -1,31 +1,7 @@
 import React from 'react';
-// import {
-//   SafeAreaView,
-//   ScrollView,
-//   StatusBar,
-//   StyleSheet,
-//   Text,
-//   useColorScheme,
-//   View,
-// } from 'react-native';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import Admin, {
-  Dashboard,
-  UsersProducts,
-  Users,
-  EditProduct,
-  AddProduct,
-} from './screens/Admin';
-import Tabs from './navigation/Tabs';
-import ProductList from './screens/ProductList';
-
-const Stack = createNativeStackNavigator();
-
-//
-
+import AppNavigation from './navigation/AppNavigation';
 const App = () => {
-  return <AddProduct />;
-  //<Tabs />;
+  return <AppNavigation />;
 };
 
 export default App;

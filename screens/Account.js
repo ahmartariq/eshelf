@@ -13,8 +13,6 @@ import {SettingLink} from '../components/SettingLink';
 import {Field, Password} from '../components/Inputs';
 import {Button} from '../components/Button';
 
-import {NavigationContainer} from '@react-navigation/native';
-import {navigate} from '@react-navigation/routers/lib/typescript/src/CommonActions';
 
 const colors = Theme.colors;
 const size = Theme.size;
@@ -137,6 +135,7 @@ export const ChangeEmail = ({navigation}) => {
 };
 
 export const ChangePassword = ({navigation}) => {
+  
   const handleChangePasswordButton = () => {
     console.log(currentPassword);
     console.log(newPassword);
@@ -174,20 +173,25 @@ export const ChangePassword = ({navigation}) => {
         CHANGE PASSWORD
       </Text>
 
-      <Password placeholder={'CURRENT PASSWORD '} />
+      <Password 
+        placeholder={'CURRENT PASSWORD '} 
+        onChangeText={setCurrentPassword}
+        value={currentPassword}
+
+      />
 
       <Password
         placeholder={'NEW PASSWORD '}
         marginTop={'7%'}
-        onChangeText={newPassword}
-        value={setNewPassword}
+        onChangeText={setNewPassword}
+        value={newPassword}
       />
 
       <Password
         placeholder={'RETYPE NEW PASSWORD '}
         marginTop={'7%'}
-        onChangeText={retypeNewPassword}
-        value={setRetypeNewPassword}
+        onChangeText={setRetypeNewPassword}
+        value={retypeNewPassword}
       />
 
       <Button
@@ -195,7 +199,7 @@ export const ChangePassword = ({navigation}) => {
         text={'SAVE'}
         marginTop={'10%'}
         onPress={() => {
-          navigation.popToTop();
+          // navigation.popToTop();
         }}
       />
     </View>

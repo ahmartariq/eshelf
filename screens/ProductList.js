@@ -5,8 +5,8 @@ import {
   Image,
   ScrollView,
   TouchableOpacity,
-  FlatList,
-} from 'react-native';
+  Flatass} from 'react-native';
+
 import Theme from '../Theme';
 import {SvgXml} from 'react-native-svg';
 import {BorderedButton} from '../components/Button';
@@ -109,114 +109,47 @@ const ProductList = () => {
   const backArrow = `<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
 <path d="M15 8H1" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
 <path d="M8 15L1 8L8 1" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-</svg>`;
+</svg>`
 
-  return (
-    <ScrollView
-      style={{
-        backgroundColor: colors.background,
-        paddingTop: '10%',
-        paddingHorizontal: 10,
-        flex: 1,
-      }}>
-      <View style={{flexDirection: 'row'}}>
-        <View>
-          <TouchableOpacity activeOpacity={0.7}>
-            <SvgXml xml={backArrow} />
-          </TouchableOpacity>
-          <Text style={Theme.eshlefWhite}>ESHELF</Text>
-        </View>
-        <View style={{marginLeft: 20, alignItems: 'flex-end'}}>
-          <BorderedButton text="FILTERS" height={29} marginTop={10} />
-        </View>
-      </View>
-      <ScrollView
-        horizontal={true}
-        style={{flexDirection: 'row', flex: 1, marginTop: '3%'}}
-        showsHorizontalScrollIndicator={false}>
-        {Category.map((c, key) => (
-          <TouchableOpacity
-            style={{marginRight: 30}}
-            activeOpacity={0.7}
-            key={key}
-            onPress={e => changeCategory(e, key)}>
-            <Text
-              style={{
-                fontSize: size.headline,
-                color: active === key ? colors.primary : colors.gray,
-              }}>
-              {c}
-            </Text>
-          </TouchableOpacity>
-        ))}
-      </ScrollView>
-      <View
-        style={{
-          flexWrap: 'wrap',
-          width: '100%',
-          flexDirection: 'row',
-          paddingBottom: 80,
-        }}>
-        {select.length > 0 ? (
-          select.map((sel, key) => (
-            <TouchableOpacity
-              activeOpacity={0.9}
-              key={key}
-              style={
-                key % 4 === 0 && key !== 0
-                  ? {width: '100%', marginVertical: 9.5}
-                  : {width: '44%', margin: 9.5, overflow: 'hidden'}
-              }>
-              <Image
-                source={sel.image}
-                style={
-                  key % 4 === 0 && key !== 0
-                    ? {width: '100%'}
-                    : {width: '100%', height: 200}
+    return (
+        <ScrollView style={{ backgroundColor: colors.background, paddingTop: '10%', paddingHorizontal: 10, flex: 1 }}>
+            <View style={{ flexDirection: 'row' }}>
+                <View>
+                    <TouchableOpacity activeOpacity={0.7} >
+                        <SvgXml xml={backArrow} />
+                    </TouchableOpacity>
+                    <Text style={Theme.eshlefWhite}>ESHELF</Text>
+                </View>
+                <View style={{ marginLeft: 20, alignItems: 'flex-end' }}>
+                    <BorderedButton text='FILTERS' height={29} marginTop={10} />
+                </View>
+            </View>
+            <ScrollView horizontal={true} style={{ flexDirection: 'row', flex: 1, marginTop: '3%'}} showsHorizontalScrollIndicator={false}>
+                {
+                    Category.map((c, key) => ( 
+                        <TouchableOpacity style={{ marginRight: 30 }} activeOpacity={0.7} key={key} onPress={(e) => changeCategory(e,key)} >
+                            <Text style={{ fontSize: size.headline, color: active === key ? colors.primary : colors.gray }}>{c}</Text>
+                        </TouchableOpacity>
+                    ))
                 }
-              />
-              <Text
-                style={{
-                  color: colors.text,
-                  fontFamily: 'GT-America-Regular',
-                  fontSize: 12,
-                  marginTop: 4,
-                }}>
-                {sel.name}
-              </Text>
-              <Text
-                style={{
-                  color: colors.primary,
-                  fontFamily: 'GT-America-Regular',
-                  fontSize: 10,
-                  marginTop: 4,
-                }}>
-                Rs. {sel.price}
-              </Text>
-            </TouchableOpacity>
-          ))
-        ) : (
-          <View
-            style={{
-              width: '100%',
-              height: 500,
-              alignItems: 'center',
-              justifyContent: 'center',
-            }}>
-            <SvgXml xml={hanger} style={{marginBottom: 12}} />
-            <Text
-              style={{
-                fontFamily: 'GT-America-Medium',
-                fontSize: 28,
-                color: colors.text,
-              }}>
-              No Product Available{' '}
-            </Text>
-          </View>
-        )}
-      </View>
-    </ScrollView>
-  );
-};
+            </ScrollView>
+            <View style={{flexWrap : 'wrap' , width: '100%' ,  flexDirection: 'row' , paddingBottom :80}}>
+            { select.length > 0 ?
+                select.map((sel, key) => (
+                    <TouchableOpacity activeOpacity={0.9} key={key} style={ key % 4 === 0 && key !==0 ?  { width: "100%", marginVertical : 9.5} :{ width: "44%" , margin : 9.5 , overflow: 'hidden'}}>
+                    <Image  source={sel.image} style={key % 4 === 0 && key !==0 ? {width: '100%' }  : {width: '100%' , height: 200}}/>
+                    <Text style={{color : colors.text, fontFamily : 'GT-America-Regular' , fontSize : 12 , marginTop : 4}}>{sel.name}</Text>
+                    <Text style={{color : colors.primary, fontFamily : 'GT-America-Regular' , fontSize : 10 , marginTop : 4}}>Rs. {sel.price}</Text>
+                </TouchableOpacity>
+                )) : <View style={{width : '100%' ,height: 500 , alignItems: 'center' , justifyContent: 'center'}}>
+                        <SvgXml xml={hanger} style={{marginBottom: 12}}/>
+                        <Text style={{fontFamily : 'GT-America-Medium' , fontSize: 28, color : colors.text}}>No Product Available </Text>
+                    </View>
+            }
+            </View>
+        </ScrollView>
+    )
+}
 
-export default ProductList;
+export default ProductList
+
