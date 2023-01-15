@@ -1,4 +1,4 @@
-import React from 'react';
+import React , {useContext} from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import Login from '../screens/Login';
@@ -14,22 +14,24 @@ import Payment, {PaymentMethodInfo} from '../screens/Payment';
 import ProductList from '../screens/ProductList';
 import Product from '../screens/Product';
 import Cart from '../screens/Cart';
-
-import AdminProfile, {
-  Users,
-  Dashboard,
-  UsersProducts,
-  EditProduct,
-  AddProduct,
-} from '../screens/Admin';
+import AdminTabs from './AdminTabs'
+import { EditProduct} from '../screens/Admin';
+import AddProduct from '../screens/AddProduct';
 
 const Stack = createNativeStackNavigator();
 const AppNavigation = () => {
+
   return (
     <NavigationContainer>
       <Stack.Navigator
         initialRouteName="Splash"
         screenOptions={{headerShown: false}}>
+
+        <Stack.Screen
+          name="AdminTabs"
+          component={AdminTabs}
+          options={{headerShown: false}}
+        />
         <Stack.Screen
           name="Tabs"
           component={Tabs}
@@ -59,10 +61,6 @@ const AppNavigation = () => {
         <Stack.Screen name="Cart" component={Cart} />
 
         {/* Admin Screens  */}
-        <Stack.Screen name="AdminProfile" component={AdminProfile} />
-        <Stack.Screen name="Users" component={Users} />
-        <Stack.Screen name="Dashboard" component={Dashboard} />
-        <Stack.Screen name="UsersProducts" component={UsersProducts} />
         <Stack.Screen name="EditProduct" component={EditProduct} />
         <Stack.Screen name="AddProduct" component={AddProduct} />
       </Stack.Navigator>
