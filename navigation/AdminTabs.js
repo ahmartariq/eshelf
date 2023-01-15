@@ -1,20 +1,16 @@
 import React, { useState } from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
-import Home from '../screens/Home';
-import Search from '../screens/Search';
-import Cart from '../screens/Cart';
-import ProductList from '../screens/ProductList';
-import Profile from '../screens/Profile';
 import { SvgXml } from 'react-native-svg';
 import Theme from '../Theme';
+
+import AdminProfile, { Users,Dashboard,UsersProducts,} from '../screens/Admin';
 
 const Tab = createBottomTabNavigator();
 
 const colors = Theme.colors;
 
-const Tabs = () => {
-  const [color, setColor] = useState(colors.text);
+const AdminTabs = () => {
 
   const menuIcon = ({ focused, color, size }) => (
     <SvgXml
@@ -46,19 +42,30 @@ fill="${colors.text}" stroke="${colors.text}"/>
     />
   );
 
-  const searchIcon = ({ focused, color, size }) => (
+  const usersIcon = ({ focused, color, size }) => (
     <SvgXml
       xml={
         focused
-          ? `<svg width="31" height="31" viewBox="0 0 31 31" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M13.5556 25.1111C19.9375 25.1111 25.1111 19.9375 25.1111 13.5556C25.1111 7.1736 19.9375 2 13.5556 2C7.1736 2 2 7.1736 2 13.5556C2 19.9375 7.1736 25.1111 13.5556 25.1111Z" 
+          ? 
+          `<svg width="37" height="31" viewBox="0 0 37 31" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M26 29V26C26 24.4087 25.3679 22.8826 24.2426 21.7574C23.1174 20.6321 21.5913 20 20 20H8C6.4087 20 4.88258 20.6321 3.75736 21.7574C2.63214 22.8826 2 24.4087 2 26V29"
+ stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M14 14C17.3137 14 20 11.3137 20 8C20 4.68629 17.3137 2 14 2C10.6863 2 8 4.68629 8 8C8 11.3137 10.6863 14 14 14Z" 
 stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-<path d="M29 29L22 22" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M35 29.0003V26.0003C34.999 24.6709 34.5565 23.3795 33.742 22.3288C32.9276 21.2781 31.7872 20.5277 30.5 20.1953" 
+stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M24.5 2.19531C25.7906 2.52576 26.9346 3.27636 27.7515 4.32878C28.5684 5.38119 29.0118 6.67556 29.0118 8.00781C29.0118 9.34007 28.5684 10.6344 27.7515 11.6868C26.9346 12.7393 25.7906 13.4899 24.5 13.8203" 
+stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
 </svg>`
-          : `<svg width="31" height="31" viewBox="0 0 31 31" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M13.5556 25.1111C19.9375 25.1111 25.1111 19.9375 25.1111 13.5556C25.1111 7.1736 19.9375 2 13.5556 2C7.1736 2 2 7.1736 2 13.5556C2 19.9375 7.1736 25.1111 13.5556 25.1111Z" 
-stroke=${colors.text} stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-<path d="M29 29L22 22" stroke=${colors.text} stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+      :`<svg width="37" height="31" viewBox="0 0 37 31" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M26 29V26C26 24.4087 25.3679 22.8826 24.2426 21.7574C23.1174 20.6321 21.5913 20 20 20H8C6.4087 20 4.88258 20.6321 3.75736 21.7574C2.63214 22.8826 2 24.4087 2 26V29"
+ stroke="${colors.text}" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M14 14C17.3137 14 20 11.3137 20 8C20 4.68629 17.3137 2 14 2C10.6863 2 8 4.68629 8 8C8 11.3137 10.6863 14 14 14Z" 
+stroke="${colors.text}" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M35 29.0003V26.0003C34.999 24.6709 34.5565 23.3795 33.742 22.3288C32.9276 21.2781 31.7872 20.5277 30.5 20.1953" 
+stroke="${colors.text}" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M24.5 2.19531C25.7906 2.52576 26.9346 3.27636 27.7515 4.32878C28.5684 5.38119 29.0118 6.67556 29.0118 8.00781C29.0118 9.34007 28.5684 10.6344 27.7515 11.6868C26.9346 12.7393 25.7906 13.4899 24.5 13.8203" 
+stroke="${colors.text}" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
 </svg>`
       }
     />
@@ -127,7 +134,6 @@ stroke= ${colors.text} stroke-width="3" stroke-linecap="round" stroke-linejoin="
 
 
   return (
-    // <NavigationContainer>
       <Tab.Navigator
         screenOptions={{
           tabBarStyle: {
@@ -143,43 +149,42 @@ stroke= ${colors.text} stroke-width="3" stroke-linecap="round" stroke-linejoin="
         }}>
         <Tab.Screen
           name="Home"
-          component={Home}
+          component={Dashboard}
           options={{
             tabBarIcon: homeIcon,
           }}
         />
         <Tab.Screen
           name="Search"
-          component={Search}
+          component={Users}
           options={{
-            tabBarIcon: searchIcon,
+            tabBarIcon: usersIcon,
             tabBarHideOnKeyboard: true
           }}
         />
         <Tab.Screen
           name="Menu"
-          component={ProductList}
+          component={UsersProducts}
           options={{
             tabBarIcon: menuIcon,
           }}
         />
         <Tab.Screen
           name="Profile"
-          component={Profile}
+          component={AdminProfile}
           options={{
             tabBarIcon: profileIcon,
           }}
         />
-        <Tab.Screen
+        {/* <Tab.Screen
           name="Cart"
-          component={Cart}
+          component={}
           options={{
             tabBarIcon: cartIcon,
           }}
-        />
+        /> */}
       </Tab.Navigator>
-    // </NavigationContainer>
   );
 };
 
-export default Tabs;
+export default AdminTabs;

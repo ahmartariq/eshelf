@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import {useState , useContext} from 'react';
 import {Text, View, TouchableOpacity} from 'react-native';
 import Theme from '../Theme';
 import {Button} from '../components/Button';
@@ -7,7 +7,6 @@ import {SvgXml} from 'react-native-svg';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {signInWithEmailAndPassword} from 'firebase/auth';
 import {auth, db} from '../FirebaseConfig';
-import {async} from '@firebase/util';
 
 import {NavigationContainer} from '@react-navigation/native';
 
@@ -29,29 +28,36 @@ const instagramSVG = `<svg width="20" height="20" viewBox="0 0 20 20" fill="none
 </svg>`;
 
 const Login = ({navigation}) => {
+
+  
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [err, setErr] = useState('');
+  const [isAdmin, setIsAdmin] = useState(false)
 
   const handleLogin = () => {
-    // setErr('');
-    // if (email === '') setErr('Email Field is empty');
-    // else if (password === '') setErr('Password Field is empty');
-    // else {
-    //   signInWithEmailAndPassword(auth, email, password)
-    //     .then(userCredential => {
-    //       storeAsync(userCredential.user.uid);
-    //       console.log('logged in');
-    //       // setEmail('')
-    //       // setPassword('')
-    //       // navigation.navigate('Home', {userId: userCredential.user});
-    //     })
-    //     .catch(error => {
-    //       setErr('Invalid Credentials!');
-    //     });
-    // }
+    setErr('');
+    if (email === '') setErr('Email Field is empty');
+    else if (password === '') setErr('Password Field is empty');
+    else if( email === "admin@gmail.com" && password === "admin123"){
+      navigation.navigate("AdminTabs")
+    }
+    else {
+      signInWithEmailAndPassword(auth, email, password)
+        .then(userCredential => {
+          storeAsync(userCredential.user.uid);
+          console.log('logged in');
+          navigation.navigate("Tabs" , {isAdmin : isAdmin })
 
-    navigation.navigate("Tabs")
+          setEmail('')
+          setPassword('')
+          navigation.navigate('Tabs');
+        })
+        .catch(error => {
+          setErr('Invalid Credentials!');
+        });
+    }
+
 
   };
 

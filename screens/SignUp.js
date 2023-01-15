@@ -1,17 +1,10 @@
 import {useEffect, useState} from 'react';
-import {
-  Text,
-  TextInput,
-  View,
-  Image,
-  TouchableOpacity,
-  ScrollView,
-} from 'react-native';
+import {Text,View,TouchableOpacity} from 'react-native';
 import Theme from '../Theme';
 import {Button} from '../components/Button';
 import {Field, Password} from '../components/Inputs';
 import {auth, db} from '../FirebaseConfig';
-import {getAuth, createUserWithEmailAndPassword} from 'firebase/auth';
+import {createUserWithEmailAndPassword} from 'firebase/auth';
 import {ref} from 'firebase/database';
 import {set} from 'firebase/database';
 
@@ -30,7 +23,7 @@ const SignUp = ({navigation}) => {
   const [rePassword, setRePassword] = useState('');
   const [err, setErr] = useState('');
 
-  const handleSignUp = ({navigation}) => {
+  const handleSignUp = () => {
     setErr('');
     if (name === '') setErr('Name Field is empty');
     else if (email === '') setErr('Email Field is empty');
@@ -41,37 +34,38 @@ const SignUp = ({navigation}) => {
     else if (password != rePassword)
       setErr('Retype password does not match email');
     else {
+      console.log("in else");
       createUserWithEmailAndPassword(auth, email, password)
         .then(userCredential => {
-          writeUserData(email, name, userCredential.user.uid);
-          // navigation.navigate('Login');
+          console.log("signed up");
+          writeUserData(email, name, password, userCredential.user.uid);
           setErr('');
           setName('');
           setEmail('');
           setReEmail('');
           setPassword('');
           setRePassword('');
+          navigation.navigate('Login');
         })
         .catch(error => {
-          // if (
-          //   (error =
-          //     'Password should be at least 6 characters (auth/weak-password)')
-          // )
-          //   setErr('Password should be at least 6 characters');
-          // else {
-          //   setErr('Email address already in use');
-          // }
-          console.log(error);
+          console.log(error.message);
+          if(error = 'Password should be at least 6 characters (auth/weak-password)')
+            setErr('Password should be at least 6 characters');
+          else {
+            setErr('Email address already in use');
+          }
         });
     }
   };
 
-  const writeUserData = (email, name, id) => {
+  const writeUserData = (email , name, password,  id) => {
     set(ref(db, 'users/' + id), {
       name: name,
       email: email,
+      password: password,
+      isAdmin: false
     });
-    navigation.navigate('Login');
+    // navigation.navigate('Login');
     console.log('User Created!!');
   };
 

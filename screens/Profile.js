@@ -36,23 +36,24 @@ const Profile = ({navigation}) => {
     }
   };
 
-  // useEffect(() => {
-  //   asyncData();
+  useEffect(() => {
+    asyncData();
 
-  //   const dbRef = ref(getDatabase());
-  //   get(child(dbRef, `users/${data}`))
-  //     .then(snapshot => {
-  //       if (snapshot.exists()) {
-  //         setName(snapshot.val().name);
-  //         setEmail(snapshot.val().email);
-  //       } else {
-  //         console.log('No data available');
-  //       }
-  //     })
-  //     .catch(error => {
-  //       console.error(error);
-  //     });
-  // }, [name, email]);
+    const dbRef = ref(getDatabase());
+    get(child(dbRef, `users/${data}`))
+      .then(snapshot => {
+        if (snapshot.exists()) {
+          setName(snapshot.val().name);
+          setEmail(snapshot.val().email);
+        } else {
+          console.log('No data available');
+        }
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  }, [name, email]);
+
 
   const BlockView = () => {
     if (active === 0) {
