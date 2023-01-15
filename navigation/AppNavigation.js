@@ -15,7 +15,7 @@ import ProductList from '../screens/ProductList';
 import Product from '../screens/Product';
 import Cart from '../screens/Cart';
 import AdminTabs from './AdminTabs'
-import { EditProduct} from '../screens/Admin';
+import UpdateProduct from '../screens/UpdateProduct';
 import AddProduct from '../screens/AddProduct';
 
 const Stack = createNativeStackNavigator();
@@ -27,11 +27,7 @@ const AppNavigation = () => {
         initialRouteName="Splash"
         screenOptions={{headerShown: false}}>
 
-        <Stack.Screen
-          name="AdminTabs"
-          component={AdminTabs}
-          options={{headerShown: false}}
-        />
+        
         <Stack.Screen
           name="Tabs"
           component={Tabs}
@@ -61,7 +57,13 @@ const AppNavigation = () => {
         <Stack.Screen name="Cart" component={Cart} />
 
         {/* Admin Screens  */}
-        <Stack.Screen name="EditProduct" component={EditProduct} />
+
+        <Stack.Screen
+          name="AdminTabs"
+          component={AdminTabs}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen name="EditProduct" component={UpdateProduct} />
         <Stack.Screen name="AddProduct" component={AddProduct} />
       </Stack.Navigator>
     </NavigationContainer>

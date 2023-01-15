@@ -57,8 +57,6 @@ const Login = ({navigation}) => {
           setErr('Invalid Credentials!');
         });
     }
-
-
   };
 
   const storeAsync = async user => {

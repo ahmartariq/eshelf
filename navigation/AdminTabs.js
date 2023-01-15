@@ -4,7 +4,10 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { SvgXml } from 'react-native-svg';
 import Theme from '../Theme';
 
-import AdminProfile, { Users,Dashboard,UsersProducts,} from '../screens/Admin';
+import AdminProfile from '../screens/AdminProfile';
+import ViewUsers from '../screens/ViewUsers';
+import AdminDashboard from '../screens/AdminDashboard';
+import AdminProducts from '../screens/AdminProducts';
 
 const Tab = createBottomTabNavigator();
 
@@ -149,14 +152,14 @@ stroke= ${colors.text} stroke-width="3" stroke-linecap="round" stroke-linejoin="
         }}>
         <Tab.Screen
           name="Home"
-          component={Dashboard}
+          component={AdminDashboard}
           options={{
             tabBarIcon: homeIcon,
           }}
         />
         <Tab.Screen
           name="Search"
-          component={Users}
+          component={ViewUsers}
           options={{
             tabBarIcon: usersIcon,
             tabBarHideOnKeyboard: true
@@ -164,7 +167,7 @@ stroke= ${colors.text} stroke-width="3" stroke-linecap="round" stroke-linejoin="
         />
         <Tab.Screen
           name="Menu"
-          component={UsersProducts}
+          component={AdminProducts}
           options={{
             tabBarIcon: menuIcon,
           }}
