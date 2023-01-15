@@ -59,7 +59,7 @@ const Profile = ({navigation}) => {
     if (active === 0) {
       return <ProfileView name={name} email={email} navigation={navigation} />;
     } else if (active == 1) {
-      return <UserSetting />;
+      return <UserSetting navigation={navigation}/>;
     }
   };
 
@@ -162,7 +162,7 @@ const ProfileView = props => {
   );
 };
 
-const UserSetting = () => {
+const UserSetting = ({navigation}) => {
   const [colorSwitchValue, setColorSwitchValue] = useState(true);
   const [emailSwitchValue, setEmailSwitchValue] = useState(false);
 
@@ -174,33 +174,34 @@ const UserSetting = () => {
   };
 
   const logoutAlert = () => {
-    // Alert.alert(
-    //   'Log Out',
-    //   'Are you sure?',
-    //   [
-    //     {
-    //       text: 'Log Out',
-    //       onPress: () => {
-    //         Alert.alert('Logged Out.');
-    //         signOut(auth)
-    //           .then(() => {
-    //             const value = AsyncStorage.removeItem('userId')
-    //           })
-    //           .catch(err => {
-    //             console.log(err);
-    //           });
-    //       },
-    //       style: 'Cancel',
-    //     },
-    //     {
-    //       text: 'Cancel',
-    //       style: 'Cancel',
-    //     },
-    //   ],
-    //   {
-    //     cancelable: true,
-    //   },
-    // );
+    Alert.alert(
+      'Log Out',
+      'Are you sure?',
+      [
+        {
+          text: 'Log Out',
+          onPress: () => {
+            Alert.alert('Logged Out.');
+            signOut(auth)
+              .then(() => {
+                AsyncStorage.removeItem('userId')
+                navigation.navigate("Login")
+              })
+              .catch(err => {
+                console.log(err);
+              });
+          },
+          style: 'Cancel',
+        },
+        {
+          text: 'Cancel',
+          style: 'Cancel',
+        },
+      ],
+      {
+        cancelable: true,
+      },
+    );
   };
 
   return (

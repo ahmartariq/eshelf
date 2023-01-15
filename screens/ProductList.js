@@ -1,16 +1,11 @@
 import React, {useState, useEffect} from 'react';
-import {
-  View,
-  Text,
-  Image,
-  ScrollView,
-  TouchableOpacity,
-  Flatass,
-} from 'react-native';
+import {  View,  Text,  Image,  ScrollView,  TouchableOpacity,Flatass,} from 'react-native';
 
 import Theme from '../Theme';
 import {SvgXml} from 'react-native-svg';
 import {BorderedButton} from '../components/Button';
+import { onValue, ref } from 'firebase/database';
+import { db } from '../FirebaseConfig';
 
 const colors = Theme.colors;
 const size = Theme.size;
@@ -19,77 +14,37 @@ const text = Theme.text;
 
 const Category = ['VIEW ALL', 'WHITE', 'BLACK', 'GREEN', 'BLUE', 'PINK'];
 
-const product = [
-  {
-    name: 'OVERSIZED CYBER GRAPHIC HOODED SWEATSHIRT',
-    price: 3000.0,
-    image: require('../assets/pics/product.png'),
-    color: 'black',
-    type: 'sweatshirt',
-  },
-  {
-    name: 'OVERSIZED AERONAUTICAL GRAPHIC HOODED SWEATSHIRT',
-    price: 3200.0,
-    image: require('../assets/pics/product2.png'),
-    color: 'black',
-    type: 'sweatshirt',
-  },
-  {
-    name: 'OVERSIZE SCRIBBLING GRAPHIC SHIRT',
-    price: 2500.0,
-    image: require('../assets/pics/product3.png'),
-    color: 'black',
-    type: 'shirt',
-  },
-  {
-    name: 'REGULAR FIT BROAD STRIPED SWEATER',
-    price: 3500.0,
-    image: require('../assets/pics/product4.png'),
-    color: 'black',
-    type: 'sweater',
-  },
-  {
-    name: 'REGULAR FIT BROAD STRIPED SWEATER',
-    price: 3500.0,
-    image: require('../assets/pics/product5.png'),
-    color: 'green',
-    type: 'sweater',
-  },
-  {
-    name: 'ANKLE HIGH SNEAKERS',
-    price: 6000.0,
-    image: require('../assets/pics/product6.png'),
-    color: 'white',
-    type: 'sneaker',
-  },
-  {
-    name: 'STANDARD STRAIGHT FIT FADED JEANS',
-    price: 2200.0,
-    image: require('../assets/pics/product7.png'),
-    color: 'blue',
-    type: 'pant',
-  },
-];
-
-const facebook = '../assets/pics/product7.png';
-
-// let value  = []
 
 const ProductList = ({navigation}) => {
   const [value, setValue] = useState([]);
   const [select, setSelect] = useState([]);
   const [active, setActive] = useState(0);
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    const dbRef = ref(db, 'products/');
+    onValue(dbRef, snapshot => {
+      let products = [];
+      snapshot.forEach(childSnapshot => {
+        const childKey = childSnapshot.key;
+        const childData = childSnapshot.val();
+        products.push({key: childKey, product: childData});
+      });
+      setData(products);
+    });
+  }, []);
+  
 
   useEffect(() => {
     setActive(0);
     setValue(
-      product.map(item => ({
+      data.map(item => ({
         ...item,
         item,
       })),
     );
 
-    setSelect(product.map(e => e));
+    setSelect(data.map(e => e));
   }, []);
 
   const changeCategory = (e, key) => {
@@ -98,9 +53,9 @@ const ProductList = ({navigation}) => {
       e.target._internalFiberInstanceHandleDEV.memoizedProps.children.toLowerCase();
 
     if (catSelected === 'view all') {
-      setSelect(product.map(e => e));
+      setSelect(data.map(e => e));
     } else {
-      setSelect(product.filter(val => val.color === catSelected).map(c => c));
+      setSelect(data.filter(val => val.product.color.toLowerCase() === catSelected).map(c => c));
     }
   };
 
@@ -172,7 +127,7 @@ const ProductList = ({navigation}) => {
                   : {width: '44%', margin: 9.5, overflow: 'hidden'}
               }>
               <Image
-                source={sel.image}
+                source={{uri : sel.product?.image}}
                 style={
                   key % 4 === 0 && key !== 0
                     ? {width: '100%'}
@@ -186,7 +141,7 @@ const ProductList = ({navigation}) => {
                   fontSize: 12,
                   marginTop: 4,
                 }}>
-                {sel.name}
+                {sel.product.name}
               </Text>
               <Text
                 style={{
@@ -195,7 +150,7 @@ const ProductList = ({navigation}) => {
                   fontSize: 10,
                   marginTop: 4,
                 }}>
-                Rs. {sel.price}
+                Rs. {sel.product.price}
               </Text>
             </TouchableOpacity>
           ))
