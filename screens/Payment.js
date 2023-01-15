@@ -19,9 +19,14 @@ const Payment = ({navigation}) => {
         paddingHorizontal: 35,
         flex: 1,
       }}>
-      <Image
-        style={{marginTop: 9, width: 18, height: 18}}
-        source={require('../assets/pics/backarrow.png')}></Image>
+      <TouchableOpacity
+        onPress={() => {
+          navigation.pop();
+        }}>
+        <Image
+          style={{marginTop: 9, width: 18, height: 18}}
+          source={require('../assets/pics/backarrow.png')}></Image>
+      </TouchableOpacity>
       <Text
         style={{
           marginBottom: 80,
@@ -37,12 +42,13 @@ const Payment = ({navigation}) => {
         style={{flexDirection: 'row'}}
         activeOpacity={0.7}
         onPress={() => {
-          navigation.push('PaymentMethodInfo');
+          navigation.navigate('PaymentMethodInfo');
         }}>
         <Image
           source={require('../assets/pics/visa.png')}
-          style={{marginRight: 8}}></Image>
-        <SettingLink textHeading={'VISA'} marginTop={5} width={'75%'} />
+          style={{marginRight: 8}}
+        />
+        <SettingLink textHeading={'VISA'} marginTop={6} width={'75%'} />
       </TouchableOpacity>
 
       <TouchableOpacity
@@ -54,7 +60,7 @@ const Payment = ({navigation}) => {
         <Image
           source={require('../assets/pics/mastercard.png')}
           style={{marginRight: 8}}></Image>
-        <SettingLink textHeading={'MASTERCARD'} marginTop={5} width={'75%'} />
+        <SettingLink textHeading={'MASTERCARD'} marginTop={6} width={'75%'} />
       </TouchableOpacity>
 
       <TouchableOpacity
@@ -66,7 +72,7 @@ const Payment = ({navigation}) => {
         <Image
           source={require('../assets/pics/paypal.png')}
           style={{marginRight: 8}}></Image>
-        <SettingLink textHeading={'PAYPAL'} marginTop={5} width={'75%'} />
+        <SettingLink textHeading={'PAYPAL'} marginTop={6} width={'75%'} />
       </TouchableOpacity>
     </View>
   );
@@ -81,9 +87,14 @@ export const PaymentMethodInfo = ({navigation}) => {
         paddingHorizontal: 35,
         flex: 1,
       }}>
-      <Image
-        style={{marginTop: 9, width: 18, height: 18}}
-        source={require('../assets/pics/backarrow.png')}></Image>
+      <TouchableOpacity
+        onPress={() => {
+          navigation.pop();
+        }}>
+        <Image
+          style={{marginTop: 9, width: 18, height: 18}}
+          source={require('../assets/pics/backarrow.png')}></Image>
+      </TouchableOpacity>
       <Text
         style={{
           marginBottom: 80,
@@ -124,7 +135,7 @@ export const PaymentMethodInfo = ({navigation}) => {
         height={53}
         marginTop={200}
         onPress={() => {
-          navigation.popToTop();
+          navigation.goBack();
         }}
       />
     </View>

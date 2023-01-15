@@ -1,6 +1,6 @@
-import React, { useEffect } from 'react';
-import { View } from 'react-native';
-import { SvgXml } from 'react-native-svg';
+import React, {useEffect} from 'react';
+import {View} from 'react-native';
+import {SvgXml} from 'react-native-svg';
 import Theme from '../Theme';
 
 const colors = Theme.colors;
@@ -10,7 +10,6 @@ const logoSplashSVG = `<svg width="320" height="255" viewBox="0 0 337 265" fill=
     <path d="M153.63 43.63C168.597 28.663 168.5 0 168.5 0C168.5 0 168.403 28.663 183.37 43.63C198.337 58.597 227 58.5 227 58.5C227 58.5 198.337 58.403 183.37 73.37C168.403 88.337 168.5 117 168.5 117C168.5 117 168.597 88.337 153.63 73.37C138.663 58.403 110 58.5 110 58.5C110 58.5 138.663 58.597 153.63 43.63Z" fill="#E4BEAD"/>
     </svg>`;
 const Splash = ({navigation}) => {
-
   // const [showGetStarted, setShowGetStarted] = useState(false);
 
   // useEffect(() => {
@@ -28,25 +27,24 @@ const Splash = ({navigation}) => {
 
   //   checkFirstTime();
   // }, []);
-  
+
   // if (!showGetStarted) {
   //   return null;
   // }
 
   useEffect(() => {
     setTimeout(() => {
-      navigation.navigate('GetStarted')
+      navigation.navigate('GetStarted');
     }, 4000);
-  }, [])
-
+  }, []);
 
   return (
-    <View style={{ backgroundColor: colors.background, height: '100%' }}>
-      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+    <View style={{backgroundColor: colors.background, height: '100%'}}>
+      <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
         <SvgXml xml={logoSplashSVG} />
       </View>
     </View>
   );
-}
+};
 
-export default Splash
+export default Splash;

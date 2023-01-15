@@ -13,7 +13,6 @@ import {SettingLink} from '../components/SettingLink';
 import {Field, Password} from '../components/Inputs';
 import {Button} from '../components/Button';
 
-
 const colors = Theme.colors;
 const size = Theme.size;
 const title1 = Theme.title1;
@@ -34,7 +33,7 @@ const Account = ({navigation}) => {
       }}>
       <TouchableOpacity
         onPress={() => {
-          navigation.pop();
+          navigation.goBack();
         }}>
         <Image
           style={{marginTop: 9, width: 18, height: 18}}
@@ -127,7 +126,7 @@ export const ChangeEmail = ({navigation}) => {
         text={'SAVE'}
         marginTop={'10%'}
         onPress={() => {
-          navigation.popToTop();
+          navigation.pop();
         }}
       />
     </View>
@@ -135,7 +134,6 @@ export const ChangeEmail = ({navigation}) => {
 };
 
 export const ChangePassword = ({navigation}) => {
-  
   const handleChangePasswordButton = () => {
     console.log(currentPassword);
     console.log(newPassword);
@@ -173,11 +171,10 @@ export const ChangePassword = ({navigation}) => {
         CHANGE PASSWORD
       </Text>
 
-      <Password 
-        placeholder={'CURRENT PASSWORD '} 
+      <Password
+        placeholder={'CURRENT PASSWORD '}
         onChangeText={setCurrentPassword}
         value={currentPassword}
-
       />
 
       <Password
@@ -199,7 +196,7 @@ export const ChangePassword = ({navigation}) => {
         text={'SAVE'}
         marginTop={'10%'}
         onPress={() => {
-          // navigation.popToTop();
+          navigation.goBack();
         }}
       />
     </View>
